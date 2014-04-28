@@ -1,4 +1,5 @@
 require 'spec_helper'
+
 describe PagesController do
   describe 'GET front_page' do
     it 'renders the front page template' do

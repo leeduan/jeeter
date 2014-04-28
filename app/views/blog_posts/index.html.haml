@@ -1,0 +1,14 @@
+.container
+  .row
+    .main-col.col-sm-8.col-lg-9
+      %h1 Blog Posts
+      - @posts.each do |post|
+        %h3
+          = post.title
+        %p
+          = post.content
+        %p.small
+          Posted on
+          = print_date(post.created_at)
+    .sidebar-col.col-sm-4.col-lg-3
+      = render 'shared/sidebar'

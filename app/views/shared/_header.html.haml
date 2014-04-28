@@ -6,14 +6,13 @@
           Toggle navigation
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand(href="#")
-        RailsPress
+      = link_to 'Jeeter', root_path, class: 'navbar-brand'
     .collapse.navbar-collapse
       %ul.nav.navbar-nav
         %li
           = link_to 'Home', root_path
         %li
-          %a(href="#") Blog
+          = link_to 'Blog', blog_path
       %ul.nav.navbar-nav.navbar-right
         %li
           %a(href="#") Login
