@@ -1,28 +1,20 @@
-== README
+== Jeeter
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Jeeter is a Rails-based application that provides pre-built CSM features.
 
-Things you may want to cover:
+The project aims to provide an alternative to web developers that want the flexibility of Rails but still require ease-of-use admin panels provided by purpose-built CMSs. This allows for the continued benefits of MVC but with a conscious effort to give higher levels of content control to a company's non-technical stakeholders.
 
-* Ruby version
+== Getting Started
 
-* System dependencies
+1. Clone project by running <tt>clone git@github.com:leeduan/jeeter.git</tt>.
+2. Tested environment setup procedures:
+   * Use RVM or rbenv to set ruby version to <tt>2.0</tt>.
+   * Install <tt>mysql</tt>.
+   * Install <tt>bundler</tt> by typing <tt>gem install bundler</tt>.
+   * Run <tt>bundle</tt> to install gem dependencies.
+   * Run <tt>rake db:migrate db:test:prepare</tt> and <tt>rake db:seed</tt> to set up development database.
+3. Run <tt>rails s</tt> to start application at localhost:3000
 
-* Configuration
+== License
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Jeeter is released under the {MIT License}[http://opensource.org/licenses/MIT].
