@@ -9,6 +9,6 @@
           = post.content
         %p.small
           Posted on
-          = post.created_at
+          = print_date(post.created_at)
     .sidebar-col.col-sm-4.col-lg-3
       = render 'shared/sidebar'
