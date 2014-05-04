@@ -2,7 +2,14 @@ require 'spec_helper'
 
 describe BlogPostsController do
   describe 'GET blog' do
-    let!(:post_type) { Fabricate(:post_type, name: 'Blog') }
+
+    it_behaves_like 'recent blog posts' do
+      let(:action) { get :index }
+    end
+
+    it_behaves_like 'blog categories' do
+      let(:action) { get :index }
+    end
 
     it 'renders the index template' do
       get :index
@@ -10,23 +17,17 @@ describe BlogPostsController do
     end
 
     it 'assigns @posts in desc order' do
-      3.times.map { |i| Fabricate(:post, post_type: post_type, created_at: Time.now + i) }
+      time_interval = 5
+      decrement_time = 0
+      blog_type = Fabricate(:post_type, name: 'Blog')
+
+      3.times do
+        Fabricate(:post, post_type: blog_type, created_at: Time.now - decrement_time)
+        decrement_time -= time_interval
+      end
+
       get :index
       expect(assigns(:posts)).to eq(Post.all.reverse)
-    end
-
-    it 'assigns five @recent_posts in desc order' do
-      6.times.map { |i| Fabricate(:post, post_type: post_type, created_at: Time.now + i ) }
-      get :index
-      expect(assigns(:recent_posts)).to eq(Post.last(5).reverse)
-    end
-
-    it 'assigns @categories in asc name order' do
-      news = Fabricate(:category, name: 'News')
-      sports = Fabricate(:category, name: 'Sports')
-      gossip = Fabricate(:category, name: 'Gossip')
-      get :index
-      expect(assigns(:categories)).to eq([gossip, news, sports])
     end
   end
 end

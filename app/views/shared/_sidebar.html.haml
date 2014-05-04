@@ -17,6 +17,9 @@
   .col-sm-12
     %h4 Categories
     %ul
-      - @categories.each do |category|
-        %li
-          = link_to category.name, '#'
+      - if @categories.empty?
+        %li No Categories
+      - else
+        - @categories.each do |category|
+          %li
+            = link_to category.name, '#'
