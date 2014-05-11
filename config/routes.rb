@@ -7,6 +7,6 @@ Railspress::Application.routes.draw do
     get '/login', to: 'sessions#index'
     post '/login', to: 'sessions#create'
 
-    get '/', to: 'dashboard#index'
+    get '/', to: 'dashboards#index'
   end
 end
