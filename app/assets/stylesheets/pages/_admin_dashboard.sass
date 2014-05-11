@@ -3,11 +3,25 @@
 .admin-header
   .navbar.navbar-inverse
     border-bottom: 0 none
+    @media screen and (min-width: $screen-sm)
+      min-height: 0
     .navbar-brand
       i
-        font-size: 0.9em
         margin-right: 5px
+      @media screen and (min-width: $screen-sm)
+        font-size: 1em
+        height: auto
+        padding:
+          top: 5px
+          bottom: 5px
     .navbar-nav
+      > li
+        > a
+          cursor: pointer
+          @media screen and (min-width: $screen-sm)
+            padding:
+              top: 5px
+              bottom: 5px
       .dropdown-menu
         border-top: 0 none
         @media screen and (min-width: $screen-sm)
@@ -26,7 +40,7 @@
   min-height: 100%
   margin-top: -50px
   > ul
-    margin-top: 60px
+    margin-top: 65px
     padding: 0
     > li
       list-style: none
@@ -43,10 +57,6 @@
           font-size: 1.25em
           margin-right: 5px
           vertical-align: top
-      &.dashboard
-        margin:
-          top: 1em
-          bottom: 1.5em
       &.open
         position: relative
         background-color: $admin-dropdown-open-color
