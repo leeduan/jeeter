@@ -1,0 +1,40 @@
+%ul(role="navigation")
+  %li.dashboard
+    = link_to admin_path do
+      %i.glyphicon.glyphicon-dashboard
+      Dashboard
+  %li
+    %a.dropdown-toggle
+      %i.glyphicon.glyphicon-pushpin
+      Posts
+    %ul.dropdown-menu
+      %li
+        %a(href="#") All Posts
+        %a(href="#") Add New
+        %a(href="#") Categories
+        %a(href="#") Tags
+  %li
+    %a.dropdown-toggle
+      %i.glyphicon.glyphicon-picture
+      Media
+    %ul.dropdown-menu
+      %li
+        %a(href="#") Library
+        %a(href="#") Add New
+  %li
+    %a
+      %i.glyphicon.glyphicon-comment
+      Comments
+  %li
+    %a.dropdown-toggle
+      %i.glyphicon.glyphicon-user
+      Users
+    %ul.dropdown-menu
+      %li
+        %a(href="#") All Users
+        %a(href="#") Add New
+        %a(href="#") Your Profile
+  %li
+    %a
+      %i.glyphicon.glyphicon-cog
+      Settings

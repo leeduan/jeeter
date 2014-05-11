@@ -1,5 +1,5 @@
 class Admin::SessionsController < ApplicationController
-  layout 'layouts/session'
+  layout 'layouts/basic'
 
   def new; end
 

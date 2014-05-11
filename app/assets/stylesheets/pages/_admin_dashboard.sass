@@ -1,0 +1,69 @@
+.admin-body
+  background-color: $admin-bg-color
+.admin-header
+  .navbar.navbar-inverse
+    border-bottom: 0 none
+    .navbar-brand
+      i
+        font-size: 0.9em
+        margin-right: 5px
+    .navbar-nav
+      .dropdown-menu
+        border-top: 0 none
+        @media screen and (min-width: $screen-sm)
+          background-color: $admin-dropdown-open-color
+          > li
+            > a
+              color: $gray-light
+              &:hover,
+              &:focus
+                background-color: $navbar-inverse-bg
+                color: $component-active-color
+.admin-menu
+  float: left
+  background-color: $navbar-inverse-bg
+  width: 150px
+  min-height: 100%
+  margin-top: -50px
+  > ul
+    margin-top: 60px
+    padding: 0
+    > li
+      list-style: none
+      padding: 0.5em 0 0.5em 1.2em
+      a
+        display: block
+        color: $gray-light
+        cursor: pointer
+        &:hover,
+        &:active
+          color: #fff
+          text-decoration: none
+        i
+          font-size: 1.25em
+          margin-right: 5px
+          vertical-align: top
+      &.dashboard
+        margin:
+          top: 1em
+          bottom: 1.5em
+      &.open
+        position: relative
+        background-color: $admin-dropdown-open-color
+        .dropdown-menu
+          left: 149px
+          top: -4px
+          @include border-left-radius(0)
+        > a
+          color: #fff
+  .dropdown-menu
+    background-color: $admin-dropdown-open-color
+    > li
+      > a
+        color: $gray-light
+        &:hover,
+        &:focus
+          background-color: $navbar-inverse-bg
+          color: $component-active-color
+.admin-content
+  margin-left: 150px

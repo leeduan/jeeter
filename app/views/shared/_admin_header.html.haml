@@ -1,0 +1,33 @@
+%nav.navbar.navbar-inverse(role="navigation")
+  .container-fluid
+    .navbar-header
+      %button.navbar-toggle(type="button" data-toggle="collapse" data-target=".navbar-collapse")
+        %span.sr-only
+          Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+      = link_to root_path, class: 'navbar-brand' do
+        %i.glyphicon.glyphicon-home
+        Jeeter
+    .collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        %li.dropdown
+          %a.dropdown-toggle(data-toggle="dropdown")
+            %i.glyphicon.glyphicon-plus
+            New
+            %i.caret
+          %ul.dropdown-menu
+            %li
+              %a(href="#") Post
+              %a(href="#") Media
+              %a(href="#") User
+      %ul.nav.navbar-nav.navbar-right
+        %li.dropdown
+          %a.dropdown-toggle(data-toggle="dropdown")
+            %i.glyphicon.glyphicon-user
+            Howdy, Admin
+          %ul.dropdown-menu
+            %li
+              %a(href="#") Edit My Profile
+              %a(href="#") Log Out
+
