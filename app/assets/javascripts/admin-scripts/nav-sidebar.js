@@ -22,6 +22,5 @@
     sidebarEl.find('.open').removeClass('open');
   };
 
-  // dropdownEls.on('click', handleDropdownClick);
   $(document.body).on('click', handleBodyClick);
 })(jQuery);

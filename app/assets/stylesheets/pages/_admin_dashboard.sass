@@ -33,14 +33,18 @@
               &:focus
                 background-color: $navbar-inverse-bg
                 color: $component-active-color
+.admin-sidebar-back
+  background-color: $navbar-inverse-bg
+  position: absolute
+  top: 0
+  bottom: 0
+  width: 150px
+  z-index: -1
 .admin-menu
   float: left
-  background-color: $navbar-inverse-bg
   width: 150px
-  min-height: 100%
-  margin-top: -50px
   > ul
-    margin-top: 65px
+    margin-top: 15px
     padding: 0
     > li
       list-style: none
@@ -77,3 +81,28 @@
           color: $component-active-color
 .admin-content
   margin-left: 150px
+  padding: 20px
+  &, div
+    > h1:first-child,
+    > h2:first-child,
+    > h3:first-child,
+    > h4:first-child
+      margin-top: 0
+  .panel-welcome
+    padding: 20px
+    border-radius: 0
+    @include box-shadow(0, 0, 3px, rgba(0, 0, 0, 0.2))
+    > h4:first-child
+      margin-bottom: 0.5em
+    ul
+      margin-bottom: 0
+      > li
+        > a
+          cursor: pointer
+  .panel-activity
+    padding: 20px
+    > h4:first-child
+      margin-bottom: 0.5em
+    .list-unstyled
+      a
+        padding-left: 20px
