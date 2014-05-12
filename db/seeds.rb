@@ -12,3 +12,9 @@ Post.create(
   content:   'Hello! This is your first blog post. Edit or delete it, then start blogging!',
   post_type: PostType.find_by(name: 'Blog')
 )
+User.create(
+  full_name: 'admin',
+  username:  'admin',
+  password:  'admin',
+  admin:     true
+)

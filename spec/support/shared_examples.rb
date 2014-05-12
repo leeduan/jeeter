@@ -27,3 +27,13 @@ shared_examples 'blog categories' do
     expect(assigns(:categories)).to eq(Category.last(5).reverse)
   end
 end
+
+shared_examples 'require admin' do
+  it 'redirects the user to root path if not admin' do
+    clear_current_user
+    user = Fabricate(:user)
+    session[:user_id] = user.id
+    action
+    expect(response).to redirect_to root_path
+  end
+end

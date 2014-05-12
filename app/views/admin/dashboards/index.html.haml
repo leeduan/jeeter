@@ -1,0 +1,45 @@
+%h2 Dashboard
+.panel.panel-welcome
+  %h4
+    Welcome to the Jeeter Dashboard!
+  %h4
+    %span.small Here are some helpful links to edit your site:
+  .row
+    .col-sm-4
+      %ul
+        %li
+          %a View your site
+        %li
+          %a Write a blog post
+        %li
+          %a Create another post type
+    .col-sm-4
+      %ul
+        %li
+          %a Upload a file
+        %li
+          %a Create a tag
+        %li
+          %a Review your comments
+    .col-sm-4
+      %ul
+        %li
+          %a Manage your profile
+        %li
+          %a Update site settings
+.panel.panel-activity
+  %h4
+    Activity
+  .row
+    .col-sm-6
+      %h4
+        %span.small Recent Posts
+      - @recent_posts.each do |post|
+        %ul.list-unstyled
+          %li
+            = print_date(post.created_at)
+            %a
+              = post.title
+    .col-sm-6
+      %h4
+        %span.small Comments
