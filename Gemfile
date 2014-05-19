@@ -12,6 +12,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'haml-rails'
 gem 'bcrypt-ruby'
 gem 'mysql'
+gem 'kaminari'
 
 group :development do
   gem 'letter_opener'
