@@ -1,0 +1,32 @@
+.container
+  .table-fluid
+    %table.table
+      %thead
+        %tr
+          %th Title
+          %th Author
+          %th Post Type
+          %th Categories
+          %th Tags
+          %th Date
+          %th Last Modified
+      %tbody
+        - @posts.each do |post|
+          %tr
+            %td
+              = post.title
+            %td
+              = post.user.full_name
+            %td
+              = post.post_type.name
+            %td
+              = print_list(post.categories, 'name')
+            %td
+              = print_list(post.tags, 'name')
+            %td
+              = print_date(post.created_at)
+            %td
+              = print_date(post.updated_at)
+  .text-center
+    = paginate @posts
+

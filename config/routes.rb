@@ -6,7 +6,8 @@ Railspress::Application.routes.draw do
   namespace :admin do
     get '/login', to: 'sessions#index'
     post '/login', to: 'sessions#create'
-
     get '/', to: 'dashboards#index'
+
+    resources :posts, only: :index
   end
 end
