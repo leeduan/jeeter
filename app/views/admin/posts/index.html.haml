@@ -1,4 +1,5 @@
-.container
+%h2 All Posts
+.panel.panel-posts
   .table-fluid
     %table.table
       %thead
@@ -27,6 +28,6 @@
               = print_date(post.created_at)
             %td
               = print_date(post.updated_at)
-  .text-center
-    = paginate @posts
+.text-center
+  = paginate @posts
 
