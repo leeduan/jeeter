@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Post do
+  it { should belong_to(:user) }
   it { should belong_to(:post_type) }
   it { should have_many(:categories).through(:post_categories) }
   it { should validate_presence_of(:title) }
