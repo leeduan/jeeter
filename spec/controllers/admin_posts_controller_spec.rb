@@ -46,4 +46,25 @@ describe Admin::PostsController do
       end
     end
   end
+
+  describe 'DELETE destroy' do
+    before { set_admin_user }
+
+    let(:blog_type) { Fabricate(:post_type, name: 'Blog') }
+    let(:post) { Fabricate(:post, post_type: blog_type) }
+
+    it_behaves_like 'require admin' do
+      let(:action) { delete :destroy, id: 1 }
+    end
+
+    it 'removes the post' do
+      delete :destroy, id: post.id
+      expect(Post.all).to be_empty
+    end
+
+    it 'renders the destroy template' do
+      delete :destroy, id: post.id
+      expect(response).to redirect_to admin_posts_path
+    end
+  end
 end

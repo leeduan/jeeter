@@ -11,6 +11,7 @@
           %th Tags
           %th Date
           %th Last Modified
+          %th Delete
       %tbody
         - @posts.each do |post|
           %tr
@@ -28,6 +29,9 @@
               = print_date(post.created_at)
             %td
               = print_date(post.updated_at)
+            %td.text-center
+              = link_to admin_post_path(post), method: :delete do
+                %i.glyphicon.glyphicon-remove
 .text-center
   = paginate @posts
 
