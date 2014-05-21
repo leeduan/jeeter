@@ -47,6 +47,27 @@ describe Admin::PostsController do
     end
   end
 
+  describe 'GET new' do
+    before { set_admin_user }
+
+    let(:blog_type) { Fabricate(:post_type, name: 'Blog') }
+
+    it_behaves_like 'require admin' do
+      let(:action) { get :new }
+    end
+
+    it 'assigns new Post to @post' do
+      get :new
+      expect(assigns(:post)).to be_instance_of(Post)
+      expect(assigns(:post)).to be_new_record
+    end
+
+    it 'renders the new template' do
+      get :new
+      expect(response).to render_template :new
+    end
+  end
+
   describe 'DELETE destroy' do
     before { set_admin_user }
 

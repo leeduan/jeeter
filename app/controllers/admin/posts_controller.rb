@@ -5,6 +5,12 @@ class Admin::PostsController < AdminController
     @posts = Post.page(page || 1)
   end
 
+  def new
+    @post = Post.new
+  end
+
+  def create; end
+
   def destroy
     Post.find(params[:id]).destroy
     redirect_to admin_posts_path
