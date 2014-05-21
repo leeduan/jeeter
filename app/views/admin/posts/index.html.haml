@@ -30,7 +30,7 @@
             %td
               = print_date(post.updated_at)
             %td.text-center
-              = link_to admin_post_path(post), method: :delete do
+              = link_to admin_post_path(post), method: :delete, confirm: 'Are you sure? Please confirm.' do
                 %i.glyphicon.glyphicon-remove
 .text-center
   = paginate @posts
