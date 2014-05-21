@@ -13,5 +13,6 @@
     %aside.admin-menu
       = render 'shared/admin_sidebar'
     %section.admin-content
+      = render 'shared/errors'
       = yield
     = javascript_include_tag 'admin', "data-turbolinks-track" => true

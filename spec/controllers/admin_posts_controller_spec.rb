@@ -50,8 +50,6 @@ describe Admin::PostsController do
   describe 'GET new' do
     before { set_admin_user }
 
-    let(:blog_type) { Fabricate(:post_type, name: 'Blog') }
-
     it_behaves_like 'require admin' do
       let(:action) { get :new }
     end
@@ -62,9 +60,86 @@ describe Admin::PostsController do
       expect(assigns(:post)).to be_new_record
     end
 
+    it 'assigns Category.all to @categories' do
+      sports = Fabricate(:category, name: 'Sports')
+      news = Fabricate(:category, name: 'News')
+      get :new
+      expect(assigns(:categories)).to eq([news, sports])
+    end
+
+    it 'assigns PostType.all to @post_types' do
+      blog_type = Fabricate(:post_type, name: 'Blog')
+      press_type = Fabricate(:post_type, name: 'Press')
+      get :new
+      expect(assigns(:post_types)).to eq([blog_type, press_type])
+    end
+
     it 'renders the new template' do
       get :new
       expect(response).to render_template :new
+    end
+  end
+
+  describe 'POST create' do
+    before { set_admin_user }
+
+    it_behaves_like 'require admin' do
+      let(:action) { post :create }
+    end
+
+    context 'valid post parameters' do
+      before { post :create, post: Fabricate.attributes_for(:post) }
+
+      it 'assigns flash success message' do
+        expect(flash[:success]).to be_present
+      end
+
+      it 'creates a new post' do
+        expect(Post.count).to eq(1)
+      end
+
+      it 'redirects to admin_posts_path' do
+        expect(response).to redirect_to admin_posts_path
+      end
+    end
+
+    context 'invalid post parameters' do
+      let(:call_post) { post :create, post: Fabricate.attributes_for(:post, title: '') }
+
+      it 'assigns flash danger message' do
+        call_post
+        expect(flash[:danger]).to be_present
+      end
+
+      it 'assigns new Post to @post' do
+        call_post
+        expect(assigns(:post)).to be_instance_of(Post)
+        expect(assigns(:post)).to be_new_record
+      end
+
+      it 'assigns Category.all to @categories' do
+        sports = Fabricate(:category, name: 'Sports')
+        news = Fabricate(:category, name: 'News')
+        post :create, post: Fabricate.attributes_for(:post, title: '', category: sports)
+        expect(assigns(:categories)).to eq([news, sports])
+      end
+
+      it 'assigns PostType.all to @post_types' do
+        blog_type = Fabricate(:post_type, name: 'Blog')
+        press_type = Fabricate(:post_type, name: 'Press')
+        post :create, post: Fabricate.attributes_for(:post, title: '', post_type: blog_type)
+        expect(assigns(:post_types)).to eq([blog_type, press_type])
+      end
+
+      it 'does not create a new post' do
+        call_post
+        expect(Post.count).to eq(0)
+      end
+
+      it 'renders the new template' do
+        call_post
+        expect(response).to render_template :new
+      end
     end
   end
 
