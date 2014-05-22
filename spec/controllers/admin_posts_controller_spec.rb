@@ -88,31 +88,35 @@ describe Admin::PostsController do
     end
 
     context 'valid post parameters' do
-      before { post :create, post: Fabricate.attributes_for(:post) }
-
       it 'assigns flash success message' do
+        post :create, post: Fabricate.attributes_for(:post, tags: '')
         expect(flash[:success]).to be_present
       end
 
+      it 'assigns tags to post' do
+        post :create, post: Fabricate.attributes_for(:post, tags: 'hello, jobs, what')
+        expect(Post.first.tags.count).to eq(3)
+      end
+
       it 'creates a new post' do
+        post :create, post: Fabricate.attributes_for(:post, tags: '')
         expect(Post.count).to eq(1)
       end
 
       it 'redirects to admin_posts_path' do
+        post :create, post: Fabricate.attributes_for(:post, tags: '')
         expect(response).to redirect_to admin_posts_path
       end
     end
 
     context 'invalid post parameters' do
-      let(:call_post) { post :create, post: Fabricate.attributes_for(:post, title: '') }
-
       it 'assigns flash danger message' do
-        call_post
+        post :create, post: Fabricate.attributes_for(:post, title: '')
         expect(flash[:danger]).to be_present
       end
 
       it 'assigns new Post to @post' do
-        call_post
+        post :create, post: Fabricate.attributes_for(:post, title: '')
         expect(assigns(:post)).to be_instance_of(Post)
         expect(assigns(:post)).to be_new_record
       end
@@ -132,12 +136,12 @@ describe Admin::PostsController do
       end
 
       it 'does not create a new post' do
-        call_post
+        post :create, post: Fabricate.attributes_for(:post, title: '')
         expect(Post.count).to eq(0)
       end
 
       it 'renders the new template' do
-        call_post
+        post :create, post: Fabricate.attributes_for(:post, title: '')
         expect(response).to render_template :new
       end
     end

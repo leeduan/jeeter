@@ -45,7 +45,6 @@
         %strong Tags
       %hr
       .form-group
-        / TODO: handle tags
-        %input.form-control(type="text")
+        = text_field_tag 'post[tags]', nil, class: 'form-control'
       %p
         %em Separate tags with commas

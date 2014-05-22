@@ -16,6 +16,7 @@ class Admin::PostsController < AdminController
     post.user = current_user
 
     if post.save
+      post.tags << Tag.handleInput(params[:post][:tags])
       flash[:success] = 'New post created.'
       redirect_to admin_posts_path
     else
@@ -35,6 +36,6 @@ class Admin::PostsController < AdminController
   private
 
   def post_params
-    params.require(:post).permit(:title, :content, :post_type_id, :category_ids)
+    params.require(:post).permit(:title, :content, :post_type_id, :category_ids => [])
   end
 end
