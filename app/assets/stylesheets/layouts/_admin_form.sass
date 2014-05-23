@@ -17,3 +17,34 @@
     @media screen and (min-width: $screen-sm)
       float: right
       width: 250px
+.posts-bar
+  margin-bottom: 0.5em
+  .form-control
+    display: inline-block
+  .form
+    input[type=text]
+      width: 300px
+      margin-right: 0.5em
+  .pull-right
+    @media screen and (max-width: $screen-sm-max)
+      float: none !important
+      margin-bottom: 1em
+    a
+      font-size: 1.5em
+      vertical-align: -1px
+      display: inline-block
+      width: 20px
+      text-align: center
+      margin: 0 5px
+      &:hover
+        text-decoration: none
+      &.disabled
+        color: $gray-light
+        cursor: not-allowed
+    input[type=text]
+      color: $gray-light
+      width: 40px
+      margin-right: 0.5em
+    .form-group
+      display: inline-block
+      margin: 0 5px

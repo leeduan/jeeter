@@ -15,8 +15,9 @@ class Admin::PostsController < AdminController
     post = Post.new(post_params)
     post.user = current_user
 
-    if post.save
-      post.tags << Tag.handleInput(params[:post][:tags])
+    if post.valid?
+      post.tags = Tag.handleInput(params[:post][:tags])
+      post.save
       flash[:success] = 'New post created.'
       redirect_to admin_posts_path
     else

@@ -1,6 +1,24 @@
 %h3 All Posts
 .panel.panel-posts
-  .table-fluid
+  .posts-bar
+    / %form.pull-right#post-pagination
+    = form_tag admin_posts_path, method: :get, class: 'pull-right', id: 'post-pagination' do
+      = link_to '&laquo;'.html_safe, admin_posts_path, class: "#{'disabled' if @posts.first_page?}"
+      = link_to_previous_page @posts, '&lsaquo;'.html_safe do
+        %a.disabled
+          = '&lsaquo;'.html_safe
+      .form-group
+        = text_field_tag 'page', @posts.current_page, maxlength: @posts.total_pages.to_s.length, class: 'form-control'
+        = "of #{@posts.total_pages} "
+        = submit_tag 'Submit', class: 'hidden'
+      = link_to_next_page @posts, '&rsaquo;'.html_safe do
+        %a.disabled
+          = '&rsaquo;'.html_safe
+      = link_to '&raquo;'.html_safe, admin_posts_path(page: @posts.total_pages), class: "#{'disabled' if @posts.last_page?}"
+    %form.form#post-search
+      = text_field_tag 'search_terms', nil, class: 'form-control'
+      = button_tag 'Search Posts', class: 'btn btn-default'
+  .table-responsive
     %table.table
       %thead
         %tr
@@ -32,6 +50,6 @@
             %td.text-center
               = link_to admin_post_path(post), method: :delete, confirm: 'Are you sure? Please confirm.' do
                 %i.glyphicon.glyphicon-remove
-.text-center
-  = paginate @posts
+/ .text-center
+/   = paginate @posts
 
