@@ -1,8 +1,8 @@
 class Admin::PostsController < AdminController
 
   def index
-    page = params[:page].to_i
-    @posts = Post.page(page || 1)
+    @search_term = params[:search_term];
+    @posts = Post.search_by_title(@search_term, params[:page])
   end
 
   def new

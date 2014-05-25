@@ -1,23 +1,23 @@
 %h3 All Posts
 .panel.panel-posts
   .posts-bar
-    / %form.pull-right#post-pagination
-    = form_tag admin_posts_path, method: :get, class: 'pull-right', id: 'post-pagination' do
-      = link_to '&laquo;'.html_safe, admin_posts_path, class: "#{'disabled' if @posts.first_page?}"
-      = link_to_previous_page @posts, '&lsaquo;'.html_safe do
-        %a.disabled
-          = '&lsaquo;'.html_safe
+    = form_tag admin_posts_path, method: :get, class: 'posts-pagination pull-right' do
+      = link_to_unless @posts.first_page?, '&laquo;'.html_safe, admin_posts_path(page: 1, search_term: @search_term) do
+        = link_to '&laquo;'.html_safe, '', class: 'disabled'
+      = link_to_if @posts.prev_page, '&lsaquo;'.html_safe, admin_posts_path(page: @posts.prev_page, search_term: @search_term) do
+        = link_to '&lsaquo;'.html_safe, '', class: 'disabled'
       .form-group
         = text_field_tag 'page', @posts.current_page, maxlength: @posts.total_pages.to_s.length, class: 'form-control'
         = "of #{@posts.total_pages} "
+        = hidden_field_tag 'search_term', @search_term, id: 'search_term_hidden'
         = submit_tag 'Submit', class: 'hidden'
-      = link_to_next_page @posts, '&rsaquo;'.html_safe do
-        %a.disabled
-          = '&rsaquo;'.html_safe
-      = link_to '&raquo;'.html_safe, admin_posts_path(page: @posts.total_pages), class: "#{'disabled' if @posts.last_page?}"
-    %form.form#post-search
-      = text_field_tag 'search_terms', nil, class: 'form-control'
-      = button_tag 'Search Posts', class: 'btn btn-default'
+      = link_to_if @posts.next_page, '&rsaquo;'.html_safe, admin_posts_path(page: @posts.next_page, search_term: @search_term) do
+        = link_to '&rsaquo;'.html_safe, '', class: 'disabled'
+      = link_to_unless @posts.last_page?, '&raquo;'.html_safe, admin_posts_path(page: @posts.total_pages, search_term: @search_term) do
+        = link_to '&raquo;'.html_safe, '', class: 'disabled'
+    = form_tag admin_posts_path, method: :get, class: 'posts-search' do
+      = text_field_tag 'search_term', @search_term, class: 'form-control', placeholder: 'Search by Title'
+      = submit_tag 'Search Posts', class: 'btn btn-default'
   .table-responsive
     %table.table
       %thead
@@ -27,7 +27,7 @@
           %th Post Type
           %th Categories
           %th Tags
-          %th Date
+          %th Published
           %th Last Modified
           %th Delete
       %tbody
@@ -44,12 +44,9 @@
             %td
               = print_list(post.tags, 'name')
             %td
-              = print_date(post.created_at)
+              = print_date(post.published_at)
             %td
               = print_date(post.updated_at)
             %td.text-center
               = link_to admin_post_path(post), method: :delete, confirm: 'Are you sure? Please confirm.' do
                 %i.glyphicon.glyphicon-remove
-/ .text-center
-/   = paginate @posts
-
