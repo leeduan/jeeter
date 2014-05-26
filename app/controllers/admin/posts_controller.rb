@@ -6,7 +6,7 @@ class Admin::PostsController < AdminController
   end
 
   def new
-    @post = Post.new
+    @post = Post.new(published_at: Time.now)
     @categories = Category.all
     @post_types = PostType.all
   end
@@ -16,7 +16,7 @@ class Admin::PostsController < AdminController
     post.user = current_user
 
     if post.valid?
-      post.tags = Tag.handleInput(params[:post][:tags])
+      post.tags = Tag.createByInput(params[:post][:tags])
       post.save
       flash[:success] = 'New post created.'
       redirect_to admin_posts_path
@@ -37,6 +37,14 @@ class Admin::PostsController < AdminController
   private
 
   def post_params
-    params.require(:post).permit(:title, :content, :post_type_id, :category_ids => [])
+    params[:post][:publish_status] = params[:post][:publish_status] === 'true' ? true : false
+    params.require(:post).permit(
+      :title,
+      :content,
+      :post_type_id,
+      :publish_status,
+      :published_at,
+      :category_ids => []
+    )
   end
 end

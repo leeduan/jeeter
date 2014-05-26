@@ -7,13 +7,10 @@ class Tag < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true, length: { minimum: NAME_MIN_LENGTH }
 
-  def self.handleInput(text)
+  def self.createByInput(text)
     tags = text.split(',').map do |tag|
-      name = tag.strip
-      if name.length >= NAME_MIN_LENGTH
-        tag_object = Tag.find_by name: name
-        tag_object.nil? ? Tag.create(name: name) : tag_object
-      end
+      tag_name = tag.strip
+      Tag.find_or_create_by(name: tag_name) if tag_name.length >= NAME_MIN_LENGTH
     end
     tags.compact
   end

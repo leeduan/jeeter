@@ -13,27 +13,27 @@ describe Tag do
     expect(Tag.all).to eq([mlb, nfl, nhl])
   end
 
-  describe 'self#handleInput' do
+  describe 'self#createByInput' do
     it 'should return empty array if argument of empty string' do
-      expect(Tag.handleInput('')).to eq([])
+      expect(Tag.createByInput('')).to eq([])
     end
 
     it 'should return empty array if argument is empty space' do
-      expect(Tag.handleInput(' ')).to eq([])
+      expect(Tag.createByInput(' ')).to eq([])
     end
 
     it 'should return array of tag objects from comma separated argument' do
-      expect(Tag.handleInput('insights, behaviors, logic').count).to eq(3)
+      expect(Tag.createByInput('insights, behaviors, logic').count).to eq(3)
     end
 
     it 'should return empty array if argument has words with less than 2 characters' do
-      expect(Tag.handleInput('hi, e')).to eq([Tag.find_by(name: 'hi')])
+      expect(Tag.createByInput('hi, e')).to eq([Tag.find_by(name: 'hi')])
     end
 
     it 'should return array of tag objects even if tag already exist' do
       Fabricate(:tag, name: 'insights')
       Fabricate(:tag, name: 'behaviors')
-      expect(Tag.handleInput('insights, behaviors, logic').count).to eq(3)
+      expect(Tag.createByInput('insights, behaviors, logic').count).to eq(3)
     end
   end
 end

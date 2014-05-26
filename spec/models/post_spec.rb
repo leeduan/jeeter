@@ -42,4 +42,21 @@ describe Post do
       expect(Post.search_by_title()).to eq(page_one_posts.reverse)
     end
   end
+
+  describe '#publish_status_name' do
+    it 'returns "Published" if publish_status is true and Time.now is after/equal published_at' do
+      post = Fabricate(:post, publish_status: true)
+      expect(post.publish_status_name).to eq('Published')
+    end
+
+    it 'returns "Pending" if publish_status is true and Time.now is before published_at' do
+      post = Fabricate(:post, publish_status: true, published_at: Time.now + 60)
+      expect(post.publish_status_name).to eq('Pending')
+    end
+
+    it 'returns "Draft" if publish_status is false' do
+      post = Fabricate(:post, publish_status: false)
+      expect(post.publish_status_name).to eq('Draft')
+    end
+  end
 end

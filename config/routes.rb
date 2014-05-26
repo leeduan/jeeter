@@ -9,5 +9,6 @@ Railspress::Application.routes.draw do
     get '/', to: 'dashboards#index'
 
     resources :posts
+    resources :categories, only: [:create]
   end
 end

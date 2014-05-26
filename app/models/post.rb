@@ -18,4 +18,12 @@ class Post < ActiveRecord::Base
     return self.page(page_number) if search_term.blank?
     where("title LIKE ?", "%#{search_term}%").page(page_number)
   end
+
+  def publish_status_name
+    if publish_status?
+      published_at <= Time.now ? 'Published' : 'Pending'
+    else
+      'Draft'
+    end
+  end
 end
