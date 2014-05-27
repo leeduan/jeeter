@@ -3,6 +3,8 @@
   if (!formEl.length) return;
 
   var categoryListEl = $('#categories-list');
+  var tagListEl = $('#tags-list');
+  var tagLabelsListEl = $('#labels-list');
   var inputStatusEl = $('#post_publish_status');
 
   var createNewCategory = function(el) {
@@ -20,10 +22,30 @@
         renderNewCategory(response);
       },
       error: function(response) {
-        var errorMessage = JSON.parse(response.responseText);
-        renderError(errorMessage);
+        renderError(response.responseJSON, categoryListEl);
       }
     });
+  };
+
+  var createNewTags = function(el) {
+    var inputEl = $('#add-new-tags-input');
+    el = $(el);
+
+    $.ajax({
+      type: 'POST',
+      url: el.attr('href'),
+      data: {
+        new_tag: inputEl.val()
+      },
+      success: function(response) {
+        renderNewTags(response);
+      },
+      error: function(response) {
+        renderError(response.responseJSON, tagListEl);
+      }
+    });
+
+    inputEl.val('');
   };
 
   var handleFormSubmission = function() {
@@ -47,14 +69,21 @@
     });
   };
 
-  var renderError = function(error) {
-    var alertEl = categoryListEl.find('.alert');
+  var handleAddNewTags = function() {
+    $('#add-new-tags-submit').on('click', function(e) {
+      e.preventDefault();
+      createNewTags(this);
+    });
+  };
+
+  var renderError = function(error, el) {
+    var alertEl = el.find('.alert');
     var template = templateError(error);
 
     if (alertEl.length) {
       alertEl.replaceWith(template);
     } else {
-      categoryListEl.append(template);
+      el.append(template);
     }
   };
 
@@ -70,14 +99,31 @@
     }
   };
 
+  var renderNewTags = function(tagsArray) {
+    var tagsFormListEl = $('#tags-input-list');
+
+    $.each(tagsArray, function(i, tag) {
+      tagLabelsListEl.append(templateTag(tag.name));
+      tagsFormListEl.append(templateTagInput(tag.id));
+    });
+  };
+
   var templateCategory = function(name, id) {
     return [
-      '<label class="checkbox" for="post_category_ids_'+id+'">',
-        '<input class="checkbox" id="post_category_ids_'+id+'"',
-          'name="post[category_ids][]" type="checkbox" value="'+id+'">',
+      '<label class="checkbox" for="post_category_ids_' + id + '">',
+        '<input class="checkbox" id="post_category_ids_' + id + '"',
+          'name="post[category_ids][]" type="checkbox" value="' + id + '">',
         name,
       '</label>'
     ].join('');
+  };
+
+  var templateTag = function(name) {
+    return '<div class="label label-default">' + name + '</div>';
+  };
+
+  var templateTagInput = function(id) {
+    return '<input multiple="multiple" name="post[tag_ids][]" type="hidden" value="' + id + '">';
   };
 
   var templateError = function(error) {
@@ -92,4 +138,5 @@
   handleFormSubmission();
   handleDropdowns();
   handleAddNewCategory();
+  handleAddNewTags();
 })(jQuery);

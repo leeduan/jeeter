@@ -1,6 +1,7 @@
 class Admin::CategoriesController < AdminController
   def create
     @category = Category.new(params.require(:category).permit(:name))
+
     respond_to do |format|
       if @category.save
         format.json { render json: @category, status: :created }

@@ -8,7 +8,8 @@ Railspress::Application.routes.draw do
     post '/login', to: 'sessions#create'
     get '/', to: 'dashboards#index'
 
-    resources :posts
+    resources :posts, except: [:show]
     resources :categories, only: [:create]
+    resources :tags, only: [:create]
   end
 end

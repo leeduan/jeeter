@@ -34,7 +34,7 @@
         - @posts.each do |post|
           %tr
             %td
-              = post.title
+              = link_to post.title, edit_admin_post_path(post)
             %td
               = post.user.full_name
             %td
