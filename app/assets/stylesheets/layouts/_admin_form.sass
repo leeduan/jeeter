@@ -1,0 +1,75 @@
+.admin-post-form
+  @include clearfix()
+  .column-left
+    textarea
+      min-width: 100%
+      max-width: 100%
+    @media screen and (min-width: $screen-sm)
+      margin-right: 270px
+      > div
+        float: left
+        width: 100%
+        select
+          width: 50%
+  .column-right
+    .glyphicon
+      padding-right: 0.5em
+    @media screen and (min-width: $screen-sm)
+      float: right
+      width: 250px
+.posts-bar
+  margin-bottom: 0.5em
+  .form-control
+    display: inline-block
+  .posts-search
+    input[type=text]
+      width: 300px
+      margin-right: 0.5em
+  .posts-pagination.pull-right
+    @media screen and (max-width: $screen-sm-max)
+      float: none !important
+      margin-bottom: 1em
+    a
+      font-size: 1.5em
+      vertical-align: -1px
+      display: inline-block
+      width: 20px
+      text-align: center
+      margin: 0 5px
+      &:hover
+        text-decoration: none
+      &.disabled
+        color: $gray-light
+        cursor: not-allowed
+    input[type=text]
+      color: $gray-light
+      text-align: center
+      width: 40px
+      margin-right: 0.2em
+    .form-group
+      display: inline-block
+      margin: 0 5px
+#categories-list
+  #add-new-category-container
+    display: none
+    margin-top: 1em
+    input
+      margin-bottom: 1em
+  .alert
+    padding: 5px
+.inline-form-input
+  overflow: hidden
+  padding-right: 0.5em
+  input
+    width: 100%
+#tags-list
+  p
+    margin: 0.5em 0 1em
+#labels-list
+  margin-bottom: 1em
+  .label
+    margin-right: 0.5em
+    &:last-of-type
+      margin: 0
+#tags-input-list
+  display: none

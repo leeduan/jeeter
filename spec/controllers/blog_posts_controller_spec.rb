@@ -17,17 +17,12 @@ describe BlogPostsController do
     end
 
     it 'assigns @posts in desc order' do
-      time_interval = 5
-      decrement_time = 0
       blog_type = Fabricate(:post_type, name: 'Blog')
-
-      3.times do
-        Fabricate(:post, post_type: blog_type, created_at: Time.now - decrement_time)
-        decrement_time -= time_interval
-      end
-
+      last_post = Fabricate(:post, post_type: blog_type, published_at: Time.now-15)
+      middle_post = Fabricate(:post, post_type: blog_type, published_at: Time.now-10)
+      first_post = Fabricate(:post, post_type: blog_type, published_at: Time.now-5)
       get :index
-      expect(assigns(:posts)).to eq(Post.all.reverse)
+      expect(assigns(:posts)).to eq([first_post, middle_post, last_post])
     end
   end
 end

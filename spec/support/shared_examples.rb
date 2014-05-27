@@ -5,7 +5,7 @@ shared_examples 'recent blog posts' do
     blog_type = Fabricate(:post_type, name: 'Blog')
 
     6.times do
-      Fabricate(:post, post_type: blog_type, created_at: Time.now - decrement_time)
+      Fabricate(:post, post_type: blog_type, published_at: Time.now - decrement_time)
       decrement_time -= time_interval
     end
 

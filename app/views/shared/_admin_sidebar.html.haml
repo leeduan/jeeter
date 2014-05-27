@@ -9,8 +9,8 @@
       Posts
     %ul.dropdown-menu
       %li
-        %a(href="#") All Posts
-        %a(href="#") Add New
+        = link_to 'All Posts', admin_posts_path
+        = link_to 'Add New', new_admin_post_path
         %a(href="#") Categories
         %a(href="#") Tags
   %li

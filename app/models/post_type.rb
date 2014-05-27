@@ -1,5 +1,5 @@
 class PostType < ActiveRecord::Base
-  has_many :posts, -> { order('created_at DESC') }
+  has_many :posts
   validates :name, presence: true, uniqueness: true
 
   def self.blog_posts(n = nil)
