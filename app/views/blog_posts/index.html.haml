@@ -2,7 +2,7 @@
   .row
     .main-col.col-sm-8.col-lg-9
       %h1 Blog Posts
-      - @posts.each do |post|
+      - @posts.each_with_index do |post, i|
         %h3
           = post.title
         %p
@@ -13,5 +13,7 @@
         %p.small
           Posted on
           = print_date(post.created_at)
+        - if @posts.length != i + 1
+          %hr
     .sidebar-col.col-sm-4.col-lg-3
       = render 'shared/sidebar'
