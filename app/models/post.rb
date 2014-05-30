@@ -12,6 +12,8 @@ class Post < ActiveRecord::Base
   validates :content, presence: true
   validates :post_type_id, presence: true
 
+  scope :blog_posts_only, -> { includes(:post_type).where(post_types: { name: 'Blog' }) }
+
   def self.search_by_title(search_term = '', page_str = '1')
     page_number = page_str.to_i
     page_number = page_number > 0 ? page_number : 1
