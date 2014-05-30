@@ -13,6 +13,7 @@ gem 'haml-rails'
 gem 'bcrypt-ruby'
 gem 'mysql'
 gem 'kaminari'
+gem 'truncate_html'
 
 group :development do
   gem 'letter_opener'

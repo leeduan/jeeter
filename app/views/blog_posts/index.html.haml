@@ -6,7 +6,7 @@
         %h3
           = post.title
         %p
-          = post.content.html_safe
+          = truncate_html(post.content)
         .post-categories
           - post.categories.each do |category|
             = link_to category.name, '#', class: 'label label-primary'
