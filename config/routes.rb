@@ -3,6 +3,9 @@ Railspress::Application.routes.draw do
   get '/front', to: 'pages', action: :front_page
 
   resources :blog, only: [:index, :show]
+  namespace :blog do
+    resources :users, path: 'authors', only: [:show]
+  end
 
   namespace :admin do
     get '/login', to: 'sessions#index'

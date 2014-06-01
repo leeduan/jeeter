@@ -9,4 +9,4 @@
   Posted on
   = print_date(post.created_at)
   by
-  = post.user.full_name
+  = link_to post.user.full_name, blog_user_path(post.user)
