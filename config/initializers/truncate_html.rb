@@ -1,5 +1,5 @@
 TruncateHtml.configure do |config|
-  config.length        = 1500
+  config.length        = 750
   config.omission      = '...'
   config.word_boundary = /\S[\.\?\!]/
 end
