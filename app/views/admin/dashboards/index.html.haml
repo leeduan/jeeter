@@ -8,9 +8,9 @@
     .col-sm-4
       %ul
         %li
-          %a View your site
+          = link_to 'View your site', root_path
         %li
-          %a Write a blog post
+          = link_to 'Write a blog post', new_admin_post_path
         %li
           %a Create another post type
     .col-sm-4
