@@ -4,5 +4,5 @@ Fabricator(:post) do
   post_type
   user
   published_at Time.now
-  publish_status "Published"
+  publish_status true
 end
