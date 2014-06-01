@@ -1,0 +1,12 @@
+%h3
+  = link_to post.title, blog_path(post)
+%p
+  = is_preview ? truncate_html(post.content) : post.content.html_safe
+.post-categories
+  - post.categories.each do |category|
+    = link_to category.name, '#', class: 'label label-primary'
+%p.small
+  Posted on
+  = print_date(post.created_at)
+  by
+  = post.user.full_name
