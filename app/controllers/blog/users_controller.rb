@@ -3,6 +3,6 @@ class Blog::UsersController < ApplicationController
 
   def show
     user = User.find(params[:id])
-    @posts = Post.blog_posts_only.where(user: user).page(params[:page]).per(10)
+    @posts = user.posts.blog_posts_only.page(params[:page]).per(10)
   end
 end

@@ -22,4 +22,4 @@
       - else
         - @categories.each do |category|
           %li
-            = link_to category.name, '#'
+            = link_to category.name, blog_category_path(category)

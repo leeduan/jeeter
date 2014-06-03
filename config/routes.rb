@@ -5,6 +5,7 @@ Railspress::Application.routes.draw do
   resources :blog, only: [:index, :show]
   namespace :blog do
     resources :users, path: 'authors', only: [:show]
+    resources :categories, only: [:show]
   end
 
   namespace :admin do
