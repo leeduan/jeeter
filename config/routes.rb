@@ -2,7 +2,9 @@ Railspress::Application.routes.draw do
   root to: 'pages', action: :front_page
   get '/front', to: 'pages', action: :front_page
 
-  resources :blog, only: [:index, :show]
+  resources :blog, only: [:index, :show] do
+    resources :comments, only: [:create]
+  end
   namespace :blog do
     resources :users, path: 'authors', only: [:show]
     resources :categories, only: [:show]
