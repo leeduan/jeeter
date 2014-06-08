@@ -10,3 +10,12 @@
   = print_date(post.created_at)
   by
   = link_to post.user.full_name, blog_user_path(post.user)
+  = "| #{post.comments.any? ? post.comments.size.to_s + ' Comments' : 'No Comments'}" if is_preview
+%hr
+- unless is_preview
+  %h4 Leave a Comment
+  = render 'comments/form'
+  - if @comments.any?
+    .post-comments
+      %h4 Comments
+      = render partial: 'comments/comment', collection: @comments

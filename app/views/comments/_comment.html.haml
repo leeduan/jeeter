@@ -1,0 +1,9 @@
+.comment
+  %p.comment-name
+    = comment.author_name
+    says:
+  %p.comment-content
+    = comment.content
+  %p.comment-date.small
+    Created on
+    = print_date(comment.created_at)

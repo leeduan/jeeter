@@ -11,10 +11,6 @@
         %li
           = link_to post.title, blog_path(post)
   .col-sm-12
-    %h4 Recent Comments
-    %ul
-      %li Jeeter says hi!
-  .col-sm-12
     %h4 Categories
     %ul
       - if @categories.empty?

@@ -42,6 +42,20 @@ describe BlogController do
       expect(assigns(:post)).to eq(post)
     end
 
+    it 'assigns a new @comment' do
+      get :show, id: post.id
+      expect(assigns(:comment)).to be_new_record
+      expect(assigns(:comment)).to be_instance_of Comment
+    end
+
+    it 'assigns @comments' do
+        middle_comment = Fabricate(:comment, post: post, created_at: Time.now-5)
+        last_comment = Fabricate(:comment, post: post)
+        first_comment = Fabricate(:comment, post: post, created_at: Time.now-10)
+        get :show, id: post.id
+        expect(assigns(:comments)).to eq([last_comment, middle_comment, first_comment])
+      end
+
     it 'renders the show template' do
       get :show, id: post.id
       expect(response).to render_template :show
