@@ -42,6 +42,9 @@ $ ->
       e.preventDefault()
       createNewTags $(@)
 
+  handleCkEditor = ->
+    $('.ck-textarea').ckeditor()
+
   handleDropdowns = ->
     $('#add-new-category-dropdown').on 'click', (e) ->
       e.preventDefault()
@@ -98,3 +101,4 @@ $ ->
   handleDropdowns()
   handleAddNewCategory()
   handleAddNewTags()
+  handleCkEditor()
