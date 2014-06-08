@@ -14,6 +14,23 @@ shared_examples 'recent blog posts' do
   end
 end
 
+shared_examples 'recent comments' do
+  it 'assigns five @recent_comments in desc order' do
+    decrement_time = 0
+    time_interval = 5
+    blog_type = Fabricate(:post_type, name: 'Blog')
+    blog_post = Fabricate(:post, post_type: blog_type)
+
+    6.times do
+      Fabricate(:comment, created_at: Time.now - decrement_time)
+      decrement_time -= time_interval
+    end
+
+    action
+    expect(assigns(:recent_comments)).to eq(Comment.last(5).reverse)
+  end
+end
+
 shared_examples 'blog categories' do
   it 'assigns five @categories in asc name order' do
     str = 'z'

@@ -37,9 +37,19 @@
       - @recent_posts.each do |post|
         %ul.list-unstyled
           %li
-            = print_date(post.created_at)
-            %a
-              = post.title
+            %p
+              = print_date(post.published_at)
+              %a
+                = post.title
     .col-sm-6
       %h4
         %span.small Comments
+      - @recent_comments.each do |comment|
+        %ul.list-unstyled
+          %li
+            = print_date(comment.created_at)
+            %span
+              = comment.author_name
+              says:
+            %p.gray
+              = truncate(comment.content, length: 50)

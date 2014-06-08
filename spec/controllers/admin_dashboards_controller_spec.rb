@@ -12,6 +12,10 @@ describe Admin::DashboardsController do
       let(:action) { get :index }
     end
 
+    it_behaves_like 'recent comments' do
+      let(:action) { get :index }
+    end
+
     it 'renders the index template' do
       get :index
       expect(response).to render_template :index
