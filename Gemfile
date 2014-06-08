@@ -14,6 +14,7 @@ gem 'bcrypt-ruby'
 gem 'mysql'
 gem 'kaminari'
 gem 'truncate_html'
+gem 'ckeditor_rails'
 
 group :development do
   gem 'letter_opener'
