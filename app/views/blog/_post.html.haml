@@ -1,0 +1,21 @@
+%h3
+  = link_to post.title, blog_path(post)
+%p
+  = is_preview ? truncate_html(post.content) : post.content.html_safe
+.post-categories
+  - post.categories.each do |category|
+    = link_to category.name, blog_category_path(category), class: 'label label-primary'
+%p.small
+  Posted on
+  = print_date(post.created_at)
+  by
+  = link_to post.user.full_name, blog_user_path(post.user)
+  = "| #{post.comments.any? ? post.comments.size.to_s + ' Comments' : 'No Comments'}" if is_preview
+%hr
+- unless is_preview
+  %h4 Leave a Comment
+  = render 'comments/form'
+  - if @comments.any?
+    .post-comments
+      %h4 Comments
+      = render partial: 'comments/comment', collection: @comments

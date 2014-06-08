@@ -1,0 +1,7 @@
+.main-col.col-sm-8.col-lg-9
+  %h1 Blog
+  = render partial: 'post', collection: @posts, locals: { is_preview: true }
+  .text-center
+    = paginate @posts
+.sidebar-col.col-sm-4.col-lg-3
+  = render 'shared/sidebar'

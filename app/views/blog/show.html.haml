@@ -1,0 +1,6 @@
+.main-col.col-sm-8.col-lg-9
+  = render 'shared/errors'
+  %h1 Blog
+  = render partial: 'blog/post', object: @post, locals: { is_preview: false }
+.sidebar-col.col-sm-4.col-lg-3
+  = render 'shared/sidebar'

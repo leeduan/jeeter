@@ -1,0 +1,21 @@
+= form_for @comment, url: blog_comments_path(@post, @comment) do |f|
+  - if logged_in?
+    = f.hidden_field :author_name, value: current_user.full_name
+    = f.hidden_field :author_email, value: current_user.email
+  - else
+    .row
+      .col-sm-12.col-md-9.col-lg-6
+        .form-group
+          = f.label :author_name, 'Name*'
+          = f.text_field :author_name, class: 'form-control'
+        .form-group
+          = f.label :author_email, 'Email*'
+          = f.email_field :author_email, class: 'form-control'
+        .form-group
+          = f.label :author_url, 'Website'
+          = f.text_field :author_url, class: 'form-control'
+  .form-group
+    = f.label :content, 'Content*'
+    = f.text_area :content, class: 'form-control', rows: '10'
+  .form-group
+    = f.submit 'Create Comment', class: 'btn btn-default'

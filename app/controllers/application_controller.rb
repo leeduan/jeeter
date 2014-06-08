@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_recent_posts
-    @recent_posts = PostType.blog_posts(5)
+    @recent_posts = Post.blog_posts_only.limit(5)
   end
 
   def set_categories

@@ -11,6 +11,8 @@
     %header
       = render 'shared/header'
     %section.main-content
-      = yield
+      .container
+        .row
+          = yield
     %footer
       = render 'shared/footer'

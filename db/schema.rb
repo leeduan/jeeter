@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140525024357) do
+ActiveRecord::Schema.define(version: 20140607201617) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "comments", force: true do |t|
+    t.text     "content"
+    t.integer  "post_id"
+    t.integer  "user_id"
+    t.string   "author_name"
+    t.string   "author_email"
+    t.string   "author_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -63,6 +74,7 @@ ActiveRecord::Schema.define(version: 20140525024357) do
     t.boolean  "admin"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email"
   end
 
 end

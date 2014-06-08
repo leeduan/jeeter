@@ -9,11 +9,7 @@
     %ul
       - @recent_posts.each do |post|
         %li
-          = link_to post.title, '#'
-  .col-sm-12
-    %h4 Recent Comments
-    %ul
-      %li Jeeter says hi!
+          = link_to post.title, blog_path(post)
   .col-sm-12
     %h4 Categories
     %ul
@@ -22,4 +18,4 @@
       - else
         - @categories.each do |category|
           %li
-            = link_to category.name, '#'
+            = link_to category.name, blog_category_path(category)
