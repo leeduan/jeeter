@@ -10,7 +10,7 @@
           = f.collection_select :post_type_id, @post_types, :id, :name, {}, { class: 'form-control' }
         .form-group
           = f.label :content, 'Content'
-          = f.text_area :content, class: 'form-control', rows: '20'
+          = f.text_area :content, class: 'ck-textarea form-control'
   .column-right
     .panel
       %p
