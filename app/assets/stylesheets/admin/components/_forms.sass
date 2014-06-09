@@ -17,18 +17,18 @@
     @media screen and (min-width: $screen-sm)
       float: right
       width: 250px
-.posts-bar
+.panel-bar
   margin-bottom: 0.5em
   .form-control
     display: inline-block
-  .posts-search
+  .bar-search
+    text-align: right
     input[type=text]
-      width: 300px
+      width: 200px
       margin-right: 0.5em
-  .posts-pagination.pull-right
-    @media screen and (max-width: $screen-sm-max)
-      float: none !important
-      margin-bottom: 1em
+  .pagination-form
+    text-align: right
+    margin-bottom: 1em
     a
       font-size: 1.5em
       vertical-align: -1px
@@ -49,6 +49,15 @@
     .form-group
       display: inline-block
       margin: 0 5px
+  &.posts-bar
+    .pagination-form
+      @media screen and (min-width: $screen-md)
+        float: right !important
+        margin-bottom: 0
+    .bar-search
+      text-align: left
+      input[type=text]
+        width: 300px
 #categories-list
   #add-new-category-container
     display: none

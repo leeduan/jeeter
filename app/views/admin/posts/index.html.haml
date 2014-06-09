@@ -1,7 +1,7 @@
 %h3 All Posts
 .panel.panel-posts
-  .posts-bar
-    = form_tag admin_posts_path, method: :get, class: 'posts-pagination pull-right' do
+  .panel-bar.posts-bar
+    = form_tag admin_posts_path, method: :get, class: 'pagination-form' do
       = link_to_unless @posts.first_page?, '&laquo;'.html_safe, admin_posts_path(page: 1, search_term: @search_term) do
         = link_to '&laquo;'.html_safe, '', class: 'disabled'
       = link_to_if @posts.prev_page, '&lsaquo;'.html_safe, admin_posts_path(page: @posts.prev_page, search_term: @search_term) do
@@ -15,7 +15,7 @@
         = link_to '&rsaquo;'.html_safe, '', class: 'disabled'
       = link_to_unless @posts.last_page?, '&raquo;'.html_safe, admin_posts_path(page: @posts.total_pages, search_term: @search_term) do
         = link_to '&raquo;'.html_safe, '', class: 'disabled'
-    = form_tag admin_posts_path, method: :get, class: 'posts-search' do
+    = form_tag admin_posts_path, method: :get, class: 'bar-search' do
       = text_field_tag 'search_term', @search_term, class: 'form-control', placeholder: 'Search by Title'
       = submit_tag 'Search Posts', class: 'btn btn-default'
   .table-responsive

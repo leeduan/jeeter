@@ -4,7 +4,7 @@ class Admin::PostsController < AdminController
 
   def index
     @search_term = params[:search_term]
-    @posts = Post.search_by_title(@search_term, params[:page])
+    @posts = Post.search_by_column(@search_term, params[:page])
   end
 
   def new

@@ -1,0 +1,51 @@
+%h3 Categories
+.admin-columns
+  .column-left
+    .comment-body
+      .panel
+        %h4 Add New Category
+        = form_for @category, url: admin_categories_path do |f|
+          .form-group
+            = f.label :name
+            = f.text_field :name, class: 'form-control'
+          .form-group
+            = f.label :description
+            = f.text_area :description, class: 'form-control', rows: '5'
+          .form-group
+            = f.submit 'Add New Category', class: 'btn btn-default'
+
+  .column-right
+    .panel.panel-bar.categories-bar
+      = form_tag admin_categories_path, method: :get, class: 'pagination-form' do
+        = link_to_unless @categories.first_page?, '&laquo;'.html_safe, admin_categories_path(page: 1, search_term: @search_term) do
+          = link_to '&laquo;'.html_safe, '', class: 'disabled'
+        = link_to_if @categories.prev_page, '&lsaquo;'.html_safe, admin_categories_path(page: @categories.prev_page, search_term: @search_term) do
+          = link_to '&lsaquo;'.html_safe, '', class: 'disabled'
+        .form-group
+          = text_field_tag 'page', @categories.current_page, maxlength: @categories.total_pages.to_s.length, class: 'form-control'
+          = "of #{@categories.total_pages} "
+          = hidden_field_tag 'search_term', @search_term, id: 'search_term_hidden'
+          = submit_tag 'Submit', class: 'hidden'
+        = link_to_if @categories.next_page, '&rsaquo;'.html_safe, admin_categories_path(page: @categories.next_page, search_term: @search_term) do
+          = link_to '&rsaquo;'.html_safe, '', class: 'disabled'
+        = link_to_unless @categories.last_page?, '&raquo;'.html_safe, admin_categories_path(page: @categories.total_pages, search_term: @search_term) do
+          = link_to '&raquo;'.html_safe, '', class: 'disabled'
+      = form_tag admin_categories_path, method: :get, class: 'bar-search' do
+        = text_field_tag 'search_term', @search_term, class: 'form-control', placeholder: 'Search by Title'
+        = submit_tag 'Search Categories', class: 'btn btn-default'
+      .table-responsive
+        %table.table
+          %thead
+            %tr
+              %th Name
+              %th Description
+              %th Posts
+          %tbody
+            - @categories.each do |category|
+              %tr
+                %td
+                  = link_to category.name, blog_category_path(category)
+                %td
+                  = truncate(category.description, length: 30)
+                %td
+                  = category.posts.size

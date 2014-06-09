@@ -1,0 +1,17 @@
+.admin-columns
+  @include clearfix()
+  .column-left
+    @media screen and (min-width: $screen-sm)
+      margin-right: 500px
+      > div
+        float: left
+        width: 100%
+        textarea
+          min-width: 100%
+          max-width: 100%
+  .column-right
+    @media screen and (min-width: $screen-sm)
+      float: right
+      width: 480px
+.admin-footer
+  margin-top: 1em
