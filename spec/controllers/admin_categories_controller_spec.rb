@@ -5,7 +5,7 @@ describe Admin::CategoriesController do
     before { set_admin_user }
 
     it_behaves_like 'require admin' do
-      let(:action) { post :create }
+      let(:action) { get :index }
     end
 
     it 'assigns @search_term' do
@@ -43,7 +43,7 @@ describe Admin::CategoriesController do
       context 'valid category params' do
         it 'responds with category created' do
           category_attributes = Fabricate.attributes_for(:category, name: 'News')
-          post :create, category: category_attributes, format: :json
+          xhr :post, :create, category: category_attributes, format: :json
           expect(JSON.parse(response.body)['name']).to eq(category_attributes[:name])
         end
       end
@@ -52,13 +52,13 @@ describe Admin::CategoriesController do
         it 'response with error of has been taken if category exists' do
           Fabricate(:category, name: 'News')
           category_attributes = Fabricate.attributes_for(:category, name: 'News')
-          post :create, category: category_attributes, format: :json
+          xhr :post, :create, category: category_attributes, format: :json
           expect(JSON.parse(response.body)['name']).to eq(["has already been taken"])
         end
 
         it 'responds with error of cant be blank if empty string' do
           category_attributes = Fabricate.attributes_for(:category, name: '')
-          post :create, category: category_attributes, format: :json
+          xhr :post, :create, category: category_attributes, format: :json
           expect(JSON.parse(response.body)['name']).to eq(["can't be blank"])
         end
       end

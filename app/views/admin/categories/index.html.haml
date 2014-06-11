@@ -44,7 +44,7 @@
             - @categories.each do |category|
               %tr
                 %td
-                  = link_to category.name, blog_category_path(category)
+                  = link_to category.name, ''
                 %td
                   = truncate(category.description, length: 30)
                 %td

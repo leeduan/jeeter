@@ -19,6 +19,7 @@ $ ->
 
   createNewTags = (el) ->
     tagsInputEl = $('#add-new-tags-input')
+    return if tagsInputEl.val() is ''
 
     $.ajax
       type: 'POST'

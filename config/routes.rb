@@ -17,6 +17,6 @@ Railspress::Application.routes.draw do
 
     resources :posts, except: [:show]
     resources :categories, only: [:index, :create]
-    resources :tags, only: [:create]
+    resources :tags, only: [:index, :create]
   end
 end
