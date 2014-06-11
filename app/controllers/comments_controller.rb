@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
       flash[:success] = 'New comment created.'
       redirect_to blog_path(@post)
     else
-      flash[:danger] = 'Please fill out all required fields.'
+      flash.now[:danger] = 'Please fill out all required fields.'
       set_recent_posts
       set_categories
       @comments = @post.comments.reload
