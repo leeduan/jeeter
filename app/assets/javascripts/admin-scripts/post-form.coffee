@@ -97,8 +97,9 @@ $ ->
       "</div>"
     ].join ''
 
-  handleFormSubmission()
-  handleDropdowns()
-  handleAddNewCategory()
-  handleAddNewTags()
-  handleCkEditor()
+  $(document).on 'ready page:load', ->
+    handleFormSubmission()
+    handleDropdowns()
+    handleAddNewCategory()
+    handleAddNewTags()
+    handleCkEditor()
