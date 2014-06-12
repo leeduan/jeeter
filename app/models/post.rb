@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
   default_scope { order('published_at DESC') }
+  include Searchable
 
   belongs_to :user
   belongs_to :post_type
@@ -15,13 +16,6 @@ class Post < ActiveRecord::Base
 
   scope :blog_posts_only, -> { where(publish_status: true)
     .includes(:post_type).where(post_types: { name: 'Blog' }) }
-
-  def self.search_by_title(search_term = '', page_str = '1')
-    page_number = page_str.to_i
-    page_number = page_number > 0 ? page_number : 1
-    return self.page(page_number) if search_term.blank?
-    where("title LIKE ?", "%#{search_term}%").page(page_number)
-  end
 
   def publish_status_name
     if publish_status?

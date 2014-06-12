@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
 
+  def set_recent_comments
+    @recent_comments = Comment.limit(5)
+  end
+
   def set_recent_posts
     @recent_posts = Post.blog_posts_only.limit(5)
   end

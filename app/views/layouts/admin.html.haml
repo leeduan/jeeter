@@ -5,6 +5,7 @@
     %meta(charset="UTF-8")
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
     = stylesheet_link_tag    "admin", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag 'admin', "data-turbolinks-track" => true
     = csrf_meta_tags
   %body.admin-body
     %header.admin-header
@@ -16,4 +17,3 @@
       = render 'shared/errors'
       = yield
       = render 'shared/admin_footer'
-    = javascript_include_tag 'admin', "data-turbolinks-track" => true

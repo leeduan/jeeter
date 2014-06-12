@@ -1,0 +1,55 @@
+%h3 Tags
+.admin-columns
+  .column-left
+    .comment-body
+      .panel
+        %h4 Add New Tag
+        = form_for @tag, url: admin_tags_path do |f|
+          .form-group
+            = f.label :name
+            = f.text_field :name, class: 'form-control'
+          .form-group
+            = f.label :description
+            = f.text_area :description, class: 'form-control', rows: '5'
+          .form-group
+            = f.submit 'Add New Tag', class: 'btn btn-default'
+
+  .column-right
+    .panel.panel-bar.categories-bar
+      = form_tag admin_tags_path, method: :get, class: 'pagination-form' do
+        = link_to_unless @tags.first_page?, '&laquo;'.html_safe, admin_tags_path(page: 1, search_term: @search_term) do
+          = link_to '&laquo;'.html_safe, '', class: 'disabled'
+        = link_to_if @tags.prev_page, '&lsaquo;'.html_safe, admin_tags_path(page: @tags.prev_page, search_term: @search_term) do
+          = link_to '&lsaquo;'.html_safe, '', class: 'disabled'
+        .form-group
+          = text_field_tag 'page', @tags.current_page, maxlength: @tags.total_pages.to_s.length, class: 'form-control'
+          = "of #{@tags.total_pages} "
+          = hidden_field_tag 'search_term', @search_term, id: 'search_term_hidden'
+          = submit_tag 'Submit', class: 'hidden'
+        = link_to_if @tags.next_page, '&rsaquo;'.html_safe, admin_tags_path(page: @tags.next_page, search_term: @search_term) do
+          = link_to '&rsaquo;'.html_safe, '', class: 'disabled'
+        = link_to_unless @tags.last_page?, '&raquo;'.html_safe, admin_tags_path(page: @tags.total_pages, search_term: @search_term) do
+          = link_to '&raquo;'.html_safe, '', class: 'disabled'
+      = form_tag admin_tags_path, method: :get, class: 'bar-search' do
+        = text_field_tag 'search_term', @search_term, class: 'form-control', placeholder: 'Search by Title'
+        = submit_tag 'Search Categories', class: 'btn btn-default'
+      .table-responsive
+        %table.table
+          %thead
+            %tr
+              %th Name
+              %th Description
+              %th Posts
+              %th Delete
+          %tbody
+            - @tags.each do |tag|
+              %tr
+                %td
+                  = link_to tag.name, edit_admin_tag_path(tag)
+                %td
+                  = truncate(tag.description, length: 40)
+                %td
+                  = tag.posts.size
+                %td.text-center
+                  = link_to admin_tag_path(tag), method: :delete, confirm: 'Are you sure? Please confirm.' do
+                    %i.glyphicon.glyphicon-remove

@@ -11,7 +11,7 @@ admin_user = User.create(
   full_name: 'admin',
   username:  'admin',
   password:  'admin',
-  email:     'noreply@jeeter.com'
+  email:     'noreply@jeeter.com',
   admin:     true
 )
 welcome_post = Post.create(

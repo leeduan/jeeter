@@ -10,4 +10,5 @@ $ ->
     if el.closest('.admin-menu').length and el.hasClass 'dropdown-toggle'
       handleDropdownClick e
 
-  $(document.body).on 'click', handleBodyClick
+  $(document).on 'ready page:change', ->
+    $(document.body).on 'click', handleBodyClick

@@ -19,6 +19,7 @@ $ ->
 
   createNewTags = (el) ->
     tagsInputEl = $('#add-new-tags-input')
+    return if tagsInputEl.val() is ''
 
     $.ajax
       type: 'POST'
@@ -97,8 +98,9 @@ $ ->
       "</div>"
     ].join ''
 
-  handleFormSubmission()
-  handleDropdowns()
-  handleAddNewCategory()
-  handleAddNewTags()
-  handleCkEditor()
+  $(document).on 'ready page:change', ->
+    handleFormSubmission()
+    handleDropdowns()
+    handleAddNewCategory()
+    handleAddNewTags()
+    handleCkEditor()
