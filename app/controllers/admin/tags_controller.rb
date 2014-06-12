@@ -10,10 +10,32 @@ class Admin::TagsController < AdminController
     http_create
   end
 
+  def edit
+    @tag = Tag.find(params[:id])
+  end
+
+  def update
+    tag = Tag.find(params[:id])
+    tag.update(tag_params)
+
+    if tag.save
+      flash[:success] = 'Tag updated.'
+      redirect_to admin_tags_path
+    else
+      flash.now[:danger] = "Error, #{tag.errors.full_messages[0]}."
+      @tag = tag
+      render :edit
+    end
+  end
+
   private
 
+  def tag_params
+    params.require(:tag).permit(:name, :description)
+  end
+
   def http_create
-    tag = Tag.new(params.require(:tag).permit(:name, :description))
+    tag = Tag.new(tag_params)
 
     if tag.save
       flash[:success] = 'New tag created.'

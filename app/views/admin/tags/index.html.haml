@@ -40,12 +40,16 @@
               %th Name
               %th Description
               %th Posts
+              %th Delete
           %tbody
             - @tags.each do |tag|
               %tr
                 %td
-                  = link_to tag.name, ''
+                  = link_to tag.name, edit_admin_tag_path(tag)
                 %td
-                  = truncate(tag.description, length: 30)
+                  = truncate(tag.description, length: 40)
                 %td
                   = tag.posts.size
+                %td.text-center
+                  = link_to admin_tag_path(tag), method: :delete, confirm: 'Are you sure? Please confirm.' do
+                    %i.glyphicon.glyphicon-remove

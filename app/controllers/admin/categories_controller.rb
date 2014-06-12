@@ -6,7 +6,7 @@ class Admin::CategoriesController < AdminController
   end
 
   def create
-    @category = Category.new(params.require(:category).permit(:name, :description))
+    @category = Category.new(category_params)
 
     respond_to do |format|
       if @category.save
@@ -17,5 +17,29 @@ class Admin::CategoriesController < AdminController
         format.html { redirect_to admin_categories_path, flash: { danger: "Error, #{@category.errors.full_messages[0]}." } }
       end
     end
+  end
+
+  def edit
+    @category = Category.find(params[:id])
+  end
+
+  def update
+    category = Category.find(params[:id])
+    category.update(category_params)
+
+    if category.save
+      flash[:success] = 'Category updated.'
+      redirect_to admin_categories_path
+    else
+      flash.now[:danger] = "Error, #{category.errors.full_messages[0]}."
+      @category = category
+      render :edit
+    end
+  end
+
+  private
+
+  def category_params
+    params.require(:category).permit(:name, :description)
   end
 end

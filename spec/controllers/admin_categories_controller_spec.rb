@@ -32,6 +32,25 @@ describe Admin::CategoriesController do
     end
   end
 
+  describe 'GET edit' do
+    before { set_admin_user }
+    let(:category) { Fabricate(:category) }
+
+    it_behaves_like 'require admin' do
+      let(:action) { get :edit, id: category.id }
+    end
+
+    it 'assigns @category' do
+      get :edit, id: category.id
+      expect(assigns(:category)).to eq(category)
+    end
+
+    it 'renders the edit template' do
+      get :edit, id: category.id
+      expect(response).to render_template :edit
+    end
+  end
+
   describe 'POST create' do
     before { set_admin_user }
 
@@ -81,6 +100,53 @@ describe Admin::CategoriesController do
         category_attributes = Fabricate.attributes_for(:category, name: '')
         post :create, category: category_attributes
         expect(response).to redirect_to admin_categories_path
+      end
+    end
+  end
+
+  describe 'PUT update' do
+    before { set_admin_user }
+    let(:category) { Fabricate(:category, name: 'Sports') }
+
+    it_behaves_like 'require admin' do
+      let(:action) { put :update, id: category.id }
+    end
+
+    context 'valid params' do
+      before do
+        category_attributes = Fabricate.attributes_for(:category, name: 'News')
+        put :update, id: category.id, category: category_attributes
+      end
+
+      it 'sets flash success' do
+        expect(flash[:success]).to be_present
+      end
+
+      it 'updates the category' do
+        expect(category.reload.name).to eq('News')
+      end
+
+      it 'redirects to admin categories path' do
+        expect(response).to redirect_to admin_categories_path
+      end
+    end
+
+    context 'invalid params' do
+      before do
+        category_attributes = Fabricate.attributes_for(:category, name: '')
+        put :update, id: category.id, category: category_attributes
+      end
+
+      it 'assigns @category' do
+        expect(flash[:danger]).to be_present
+      end
+
+      it 'does not update the category' do
+        expect(category.name).to eq('Sports')
+      end
+
+      it 'renders the edit template' do
+        expect(response).to render_template :edit
       end
     end
   end

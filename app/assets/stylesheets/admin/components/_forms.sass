@@ -17,6 +17,10 @@
     @media screen and (min-width: $screen-sm)
       float: right
       width: 250px
+.admin-category-form,
+.admin-tag-form
+  .form-group
+    overflow: hidden
 .panel-bar
   margin-bottom: 0.5em
   .form-control
@@ -58,6 +62,9 @@
       text-align: left
       input[type=text]
         width: 300px
+td
+  &.text-center
+    width: 40px
 #categories-list
   #add-new-category-container
     display: none
