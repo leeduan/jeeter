@@ -4,7 +4,7 @@ require 'rails/all'
 
 Bundler.require(*Rails.groups)
 
-module Railspress
+module Jeeter
   class Application < Rails::Application
     config.encoding = "utf-8"
     config.active_support.escape_html_entities_in_json = true

@@ -1,4 +1,4 @@
-Railspress::Application.routes.draw do
+Jeeter::Application.routes.draw do
   root to: 'pages', action: :front_page
   get '/front', to: 'pages', action: :front_page
 

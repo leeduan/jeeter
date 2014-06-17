@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Railspress::Application.load_tasks
+Jeeter::Application.load_tasks

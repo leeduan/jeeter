@@ -1,4 +1,4 @@
-Railspress::Application.configure do
+Jeeter::Application.configure do
   config.cache_classes = true
   config.eager_load = false
   config.serve_static_assets  = true

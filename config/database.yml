@@ -1,7 +1,7 @@
 development:
   adapter: mysql
   encoding: utf8
-  database: railspress_development
+  database: jeeter_development
   pool: 5
   username: root
   password:
@@ -9,7 +9,7 @@ development:
 test:
   adapter: mysql
   encoding: utf8
-  database: railspress_test
+  database: jeeter_test
   pool: 5
   username: root
   password:
@@ -17,7 +17,7 @@ test:
 production:
   adapter: mysql
   encoding: utf8
-  database: railspress_production
+  database: jeeter_production
   pool: 5
   username: root
   password:
