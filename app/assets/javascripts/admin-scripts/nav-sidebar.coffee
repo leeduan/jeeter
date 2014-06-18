@@ -11,5 +11,5 @@ handleBodyClick = (e) ->
     handleDropdownClick e
 
 $(document).on 'page:change', ->
-  $sidebarEl = $('.admin-menu')
+  $sidebarEl = $ '.admin-menu'
   $(document.body).on 'click', handleBodyClick

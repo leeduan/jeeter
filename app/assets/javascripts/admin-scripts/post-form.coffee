@@ -17,7 +17,7 @@ createNewCategory = (el) ->
       renderError response.responseJSON, $categoryListEl
 
 createNewTags = (el) ->
-  tagsInputEl = $('#add-new-tags-input')
+  tagsInputEl = $ '#add-new-tags-input'
   return if tagsInputEl.val() is ''
 
   $.ajax
@@ -68,7 +68,7 @@ renderNewCategory = (category) ->
   if count > 0 then $categoryListEl.prepend template else categories.last().after template
 
 renderNewTags = (tagsArray) ->
-  $tagsFormListEl = $('#tags-input-list')
+  $tagsFormListEl = $ '#tags-input-list'
 
   $.each tagsArray, (i, tag) ->
     $tagLabelsListEl.append templateTag(tag.name)
@@ -99,10 +99,10 @@ templateError = (error) ->
 
 $(document).on 'page:change', ->
   return unless ($formEl = $ '.admin-post-form').length
-  $categoryListEl = $('#categories-list')
-  $tagListEl = $('#tags-list')
-  $tagLabelsListEl = $('#labels-list')
-  $inputStatusEl = $('#post_publish_status')
+  $categoryListEl = $ '#categories-list'
+  $tagListEl = $ '#tags-list'
+  $tagLabelsListEl = $ '#labels-list'
+  $inputStatusEl = $ '#post_publish_status'
 
   handleFormSubmission()
   handleDropdowns()
