@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(version: 20140620035559) do
   end
 
   create_table "media", force: true do |t|
-    t.string   "path"
-    t.string   "content_type"
+    t.string   "file_path"
+    t.string   "file_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
