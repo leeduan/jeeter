@@ -31,13 +31,6 @@ ActiveRecord::Schema.define(version: 20140620035559) do
     t.datetime "updated_at"
   end
 
-  create_table "media", force: true do |t|
-    t.string   "file_path"
-    t.string   "file_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "post_categories", force: true do |t|
     t.integer  "post_id"
     t.integer  "category_id"
@@ -74,6 +67,14 @@ ActiveRecord::Schema.define(version: 20140620035559) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "description"
+  end
+
+  create_table "uploads", force: true do |t|
+    t.integer  "user_id"
+    t.string   "file_path"
+    t.string   "file_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
