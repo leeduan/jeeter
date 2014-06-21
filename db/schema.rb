@@ -71,8 +71,10 @@ ActiveRecord::Schema.define(version: 20140620035559) do
 
   create_table "uploads", force: true do |t|
     t.integer  "user_id"
-    t.string   "file_path"
-    t.string   "file_type"
+    t.string   "media_file_name"
+    t.string   "media_content_type"
+    t.integer  "media_file_size"
+    t.datetime "media_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

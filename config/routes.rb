@@ -18,5 +18,6 @@ Jeeter::Application.routes.draw do
     resources :posts, except: [:show]
     resources :categories, except: [:show]
     resources :tags, except: [:show]
+    resources :uploads, only: [:new, :create], path: 'media'
   end
 end
