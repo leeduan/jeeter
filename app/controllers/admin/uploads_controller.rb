@@ -4,7 +4,6 @@ class Admin::UploadsController < AdminController
   end
 
   def create
-    binding.pry
     @upload_file = Upload.new(params.require(:upload).permit(:media))
     @upload_file.user = current_user
 

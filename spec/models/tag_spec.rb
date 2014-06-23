@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Tag do
   it { should have_many(:posts).through(:post_tags) }

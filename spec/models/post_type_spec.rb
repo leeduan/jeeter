@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe PostType do
   it { should have_many(:posts) }
