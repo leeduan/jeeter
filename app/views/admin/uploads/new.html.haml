@@ -1,5 +1,5 @@
 %h3 Upload New Media
-= form_for @upload_file, url: admin_uploads_path, html: { multipart: true } do |f|
+= form_for @upload, url: admin_uploads_path, html: { multipart: true } do |f|
   .form-group
     = f.label :media, 'Media File'
     = f.file_field :media

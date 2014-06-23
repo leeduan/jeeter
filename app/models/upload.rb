@@ -1,21 +1,14 @@
 class Upload < ActiveRecord::Base
-  UPLOADS_PATH = 'public/uploads'
-
   belongs_to :user
-  has_attached_file :media, path: ":rails_root/#{UPLOADS_PATH}/:filename"
+  has_attached_file :media
 
   before_create :sluggify_file_name
 
   validates :media, attachment_presence: true
   validates_presence_of :user_id
   validates_attachment_content_type :media, content_type: [
-    /\Aimage\/.*\Z/,
-    /\Avideo\/.*\Z/,
-    /\Aaudio\/.*\Z/,
-    /\Aapplication\/.*\Z/
+    /\Aimage\/.*\Z/, /\Avideo\/.*\Z/, /\Aaudio\/.*\Z/, /\Aapplication\/.*\Z/
   ]
-
-  private
 
   def sluggify_file_name
     extension = File.extname(media_file_name).gsub(/^\.+/, '')
@@ -23,6 +16,8 @@ class Upload < ActiveRecord::Base
     new_filename = increment_filename({ filename: to_slug(filename), extension: extension.downcase })
     self.media.instance_write(:file_name, new_filename)
   end
+
+  private
 
   def to_slug(filename)
     filename.strip!
@@ -34,13 +29,17 @@ class Upload < ActiveRecord::Base
   def increment_filename(options)
     incrementor = 1
     new_filename = "#{options[:filename]}.#{options[:extension]}"
-    file_path = "#{Rails.root}/#{UPLOADS_PATH}/#{new_filename}"
+    file_path = file_upload_path(new_filename)
 
     while FileTest.exist?(file_path)
       new_filename = "#{options[:filename]}-#{incrementor}.#{options[:extension]}"
-      file_path = "#{Rails.root}/#{UPLOADS_PATH}/#{new_filename}"
+      file_path = file_upload_path(new_filename)
       incrementor += 1
     end
     new_filename
+  end
+
+  def file_upload_path(new_filename)
+    Paperclip::Attachment.default_options[:path].sub(':filename', new_filename)
   end
 end

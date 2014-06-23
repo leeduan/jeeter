@@ -2,6 +2,7 @@ ENV["RAILS_ENV"] ||= 'test'
 require 'spec_helper'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
+require 'paperclip/matchers'
 require 'shoulda/matchers'
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
@@ -27,4 +28,8 @@ RSpec.configure do |config|
   end
   config.order = "random"
   config.infer_spec_type_from_file_location!
+  config.include Paperclip::Shoulda::Matchers
+  config.after(:each) do
+    FileUtils.rm_rf(Dir["#{Rails.root}/spec/test_files/"])
+  end
 end
