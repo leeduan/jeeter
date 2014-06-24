@@ -15,7 +15,8 @@ gem 'mysql'
 gem 'kaminari'
 gem 'truncate_html'
 gem 'ckeditor_rails'
-gem "paperclip", "~> 4.1"
+gem 'paperclip', '~> 4.1'
+gem 'jquery-fileupload-rails'
 
 group :development do
   gem 'letter_opener'
