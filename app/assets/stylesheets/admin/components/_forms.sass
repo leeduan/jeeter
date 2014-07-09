@@ -89,3 +89,24 @@ td
       margin: 0
 #tags-input-list
   display: none
+#fileupload
+  input[type=file]
+    width: 100%
+    height: 300px
+    margin-bottom: 2em
+    position: relative
+    background-color: inherit
+    border-style: dashed
+    border: 5px dashed #aaa
+    &:after
+      position: absolute
+      top: 0
+      left: 0
+      background-color: #fff
+      content: 'Drag and drop files here'
+      color: #888
+      display: block
+      text-align: center
+      width: 100%
+      height: 100%
+      padding-top: 125px

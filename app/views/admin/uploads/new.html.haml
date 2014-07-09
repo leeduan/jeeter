@@ -1,7 +1,8 @@
 %h3 Upload New Media
-= form_for @upload, url: admin_uploads_path, html: { multipart: true } do |f|
+= form_for @upload, url: admin_uploads_path, html: { multipart: true, id: 'fileupload' } do |f|
+  = f.file_field :media, id: nil
+= form_for @upload, url: admin_uploads_path, html: { multipart: true, css: 'form-inline' } do |f|
   .form-group
     = f.label :media, 'Media File'
-    = f.file_field :media
-  .form-group
-    = f.submit 'Upload File', class: 'btn btn-primary'
+    = f.file_field :media, id: nil, class: 'form-control'
+  = f.submit 'Upload File', class: 'btn btn-primary'
