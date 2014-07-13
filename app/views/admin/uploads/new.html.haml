@@ -11,7 +11,8 @@
         %th Progress
     %tbody
 = form_for @upload, url: admin_uploads_path, html: { multipart: true, css: 'form-inline' } do |f|
+  = f.label :media, 'Single File Uploader'
   .form-group
-    = f.label :media, 'Single File Uploader'
-    = f.file_field :media, id: nil, class: 'form-control'
-  = f.submit 'Upload File', class: 'btn btn-primary'
+    = f.submit 'Upload File', class: 'btn btn-primary pull-right'
+    .form-with-submit
+      = f.file_field :media, id: nil, class: 'form-control'
