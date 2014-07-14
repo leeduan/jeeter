@@ -12,9 +12,12 @@ class Admin::UploadsController < AdminController
         format.json { render json: upload, status: :created }
         format.html { redirect_to new_admin_upload_path, flash: { success: 'New file uploaded.' } }
       else
-        @upload = upload
-        format.json { render json: @upload.errors, status: :bad_request }
-        format.html { render :new, flash: { danger: "Error, #{@upload.errors.full_messages[0]}." } }
+        unless request.xhr?
+          @upload = upload
+          flash.now[:danger] = "Error, #{@upload.errors.full_messages[0]}."
+        end
+        format.json { render json: upload.errors, status: :bad_request }
+        format.html { render :new }
       end
     end
   end
