@@ -7,7 +7,7 @@ class Upload < ActiveRecord::Base
   validates :media, attachment_presence: true
   validates_presence_of :user_id
   validates_attachment_content_type :media, content_type: [
-    /\Aimage\/.*\Z/, /\Avideo\/.*\Z/, /\Aaudio\/.*\Z/, /\Aapplication\/.*\Z/
+    /^image\/.*$/, /^video\/.*$/, /^audio\/.*$/, /^application\/.*$/
   ]
 
   def sluggify_file_name
@@ -15,6 +15,26 @@ class Upload < ActiveRecord::Base
     filename = media_file_name.gsub(/\.#{extension}$/, '')
     new_filename = increment_filename({ filename: to_slug(filename), extension: extension.downcase })
     self.media.instance_write(:file_name, new_filename)
+  end
+
+  def basename
+    File.basename(media_file_name, extension)
+  end
+
+  def extension
+    File.extname media_file_name
+  end
+
+  def file_type
+    if media_content_type =~ /^image\/.*$/
+      return 'image'
+    elsif media_content_type =~ /^video\/.*$/
+      return 'video'
+    elsif media_content_type =~ /^audio\/.*$/
+      return 'audio'
+    else
+      return 'file'
+    end
   end
 
   private

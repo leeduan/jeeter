@@ -1,4 +1,8 @@
 class Admin::UploadsController < AdminController
+  def index
+    @uploads = Upload.all
+  end
+
   def new
     @upload = Upload.new
   end
@@ -20,5 +24,9 @@ class Admin::UploadsController < AdminController
         format.html { render :new }
       end
     end
+  end
+
+  def destroy
+    # TODO: handle deletion
   end
 end
