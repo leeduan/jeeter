@@ -1,0 +1,17 @@
+= form_tag path.call, method: :get, class: 'pagination-form' do
+  = link_to_unless objects.first_page?, '&laquo;'.html_safe, path.call(page: 1, search_term: terms) do
+    = link_to '&laquo;'.html_safe, '', class: 'disabled'
+  = link_to_if objects.prev_page, '&lsaquo;'.html_safe, path.call(page: objects.prev_page, search_term: terms) do
+    = link_to '&lsaquo;'.html_safe, '', class: 'disabled'
+  .form-group
+    = text_field_tag 'page', objects.current_page, maxlength: objects.total_pages.to_s.length, class: 'form-control'
+    = "of #{objects.total_pages} "
+    = hidden_field_tag 'search_term', terms, id: 'search_term_hidden'
+    = submit_tag 'Submit', class: 'hidden'
+  = link_to_if objects.next_page, '&rsaquo;'.html_safe, path.call(page: objects.next_page, search_term: terms) do
+    = link_to '&rsaquo;'.html_safe, '', class: 'disabled'
+  = link_to_unless objects.last_page?, '&raquo;'.html_safe, path.call(page: objects.total_pages, search_term: terms) do
+    = link_to '&raquo;'.html_safe, '', class: 'disabled'
+= form_tag path.call, method: :get, class: 'bar-search' do
+  = text_field_tag 'search_term', terms, class: 'form-control', placeholder: 'Search by Title'
+  = submit_tag "Search #{object_name}", class: 'btn btn-default'

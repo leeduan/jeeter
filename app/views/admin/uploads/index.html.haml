@@ -1,6 +1,7 @@
 %h3 All Uploads
 .panel.panel-uploads
-  /.panel-bar.uploads-bar
+  .panel-bar.uploads-bar
+    = render 'shared/admin_search', objects: @uploads, terms: @search_term, object_name: 'Uploads', path: method(:admin_uploads_path)
   .table-responsive
     %table.table
       %thead

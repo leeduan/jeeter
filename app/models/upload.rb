@@ -1,6 +1,9 @@
 class Upload < ActiveRecord::Base
+  include Searchable
+
   belongs_to :user
   has_attached_file :media
+  paginates_per 10
 
   before_create :sluggify_file_name
 

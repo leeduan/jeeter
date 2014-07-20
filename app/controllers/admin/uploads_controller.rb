@@ -1,6 +1,7 @@
 class Admin::UploadsController < AdminController
   def index
-    @uploads = Upload.all
+    @search_term = params[:search_term]
+    @uploads = Upload.search_by_column(@search_term, params[:page], 'media_file_name')
   end
 
   def new
