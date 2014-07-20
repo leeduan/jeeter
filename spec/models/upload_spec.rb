@@ -69,6 +69,27 @@ describe Upload do
     end
   end
 
+  describe '#extract_dimensions' do
+    context 'is an image' do
+      it 'sets the media dimensions' do
+        image = Fabricate(:upload)
+        expect(image.dimensions).to eq([350, 150])
+      end
+    end
+
+    context 'is not an image' do
+      it 'does not save the dimensions' do
+        js_upload = ActionDispatch::Http::UploadedFile.new({
+          filename: 'hello-world2a9e6fa92d2589e7b07f9b2ac6eadca1.js',
+          type: 'application/javascript',
+          tempfile: File.new("#{Rails.root}/spec/fixtures/applications/hello-world2a9e6fa92d2589e7b07f9b2ac6eadca1.js")
+        })
+        js = Fabricate(:upload, media: js_upload)
+        expect(js.dimensions).to eq(nil)
+      end
+    end
+  end
+
   describe '#file_type' do
     it 'returns "image" if file is an image' do
       image = Fabricate(:upload)
@@ -103,6 +124,27 @@ describe Upload do
       })
       js = Fabricate(:upload, media: js_upload)
       expect(js.file_type).to eq('file')
+    end
+  end
+
+  describe '#image?' do
+    context 'is an image' do
+      it 'returns true' do
+        image = Fabricate(:upload)
+        expect(image.image?).to eq(true)
+      end
+    end
+
+    context 'is not an image' do
+      it 'returns false' do
+        js_upload = ActionDispatch::Http::UploadedFile.new({
+          filename: 'hello-world2a9e6fa92d2589e7b07f9b2ac6eadca1.js',
+          type: 'application/javascript',
+          tempfile: File.new("#{Rails.root}/spec/fixtures/applications/hello-world2a9e6fa92d2589e7b07f9b2ac6eadca1.js")
+        })
+        js = Fabricate(:upload, media: js_upload)
+        expect(js.image?).to eq(false)
+      end
     end
   end
 end

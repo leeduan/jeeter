@@ -6,7 +6,8 @@ class Upload < ActiveRecord::Base
   has_attached_file :media
   paginates_per 10
 
-  before_create :sluggify_file_name
+  before_create :sluggify_file_name, :extract_dimensions
+  serialize :dimensions
 
   validates :media, attachment_presence: true
   validates_length_of :alt, maximum: 255
@@ -30,6 +31,15 @@ class Upload < ActiveRecord::Base
     File.extname media_file_name
   end
 
+  def extract_dimensions
+    return unless image?
+    tempfile = media.queued_for_write[:original]
+    unless tempfile.nil?
+      geometry = Paperclip::Geometry.from_file(tempfile)
+      self.dimensions = [geometry.width.to_i, geometry.height.to_i]
+    end
+  end
+
   def file_type
     if media_content_type =~ /^image\/.*$/
       return 'image'
@@ -40,6 +50,10 @@ class Upload < ActiveRecord::Base
     else
       return 'file'
     end
+  end
+
+  def image?
+    file_type == 'image'
   end
 
   private
