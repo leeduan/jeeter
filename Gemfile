@@ -15,6 +15,8 @@ gem 'mysql'
 gem 'kaminari'
 gem 'truncate_html'
 gem 'ckeditor_rails'
+gem 'paperclip', '~> 4.1'
+gem 'jquery-fileupload-rails'
 
 group :development do
   gem 'letter_opener'
@@ -37,7 +39,7 @@ group :test do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.0.0.beta'
+  gem 'rspec-rails', '~> 3.0.0'
   gem 'rspec-collection_matchers'
   gem 'pry'
   gem 'pry-nav'

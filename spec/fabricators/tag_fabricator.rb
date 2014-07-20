@@ -1,3 +1,3 @@
 Fabricator(:tag) do
-  name { Faker::Lorem.words(2).join(' ') }
+  name { Faker::Lorem.words(4).join(' ') }
 end

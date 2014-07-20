@@ -1,23 +1,7 @@
 %h3 All Posts
 .panel.panel-posts
   .panel-bar.posts-bar
-    = form_tag admin_posts_path, method: :get, class: 'pagination-form' do
-      = link_to_unless @posts.first_page?, '&laquo;'.html_safe, admin_posts_path(page: 1, search_term: @search_term) do
-        = link_to '&laquo;'.html_safe, '', class: 'disabled'
-      = link_to_if @posts.prev_page, '&lsaquo;'.html_safe, admin_posts_path(page: @posts.prev_page, search_term: @search_term) do
-        = link_to '&lsaquo;'.html_safe, '', class: 'disabled'
-      .form-group
-        = text_field_tag 'page', @posts.current_page, maxlength: @posts.total_pages.to_s.length, class: 'form-control'
-        = "of #{@posts.total_pages} "
-        = hidden_field_tag 'search_term', @search_term, id: 'search_term_hidden'
-        = submit_tag 'Submit', class: 'hidden'
-      = link_to_if @posts.next_page, '&rsaquo;'.html_safe, admin_posts_path(page: @posts.next_page, search_term: @search_term) do
-        = link_to '&rsaquo;'.html_safe, '', class: 'disabled'
-      = link_to_unless @posts.last_page?, '&raquo;'.html_safe, admin_posts_path(page: @posts.total_pages, search_term: @search_term) do
-        = link_to '&raquo;'.html_safe, '', class: 'disabled'
-    = form_tag admin_posts_path, method: :get, class: 'bar-search' do
-      = text_field_tag 'search_term', @search_term, class: 'form-control', placeholder: 'Search by Title'
-      = submit_tag 'Search Posts', class: 'btn btn-default'
+    = render 'shared/admin_search', objects: @posts, terms: @search_term, object_name: 'Posts', path: method(:admin_posts_path)
   .table-responsive
     %table.table
       %thead

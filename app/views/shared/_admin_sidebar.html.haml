@@ -19,8 +19,8 @@
       Media
     %ul.dropdown-menu
       %li
-        %a(href="#") Library
-        %a(href="#") Add New
+        = link_to 'Library', admin_uploads_path
+        = link_to 'Add New', new_admin_upload_path
   %li
     %a
       %i.glyphicon.glyphicon-comment

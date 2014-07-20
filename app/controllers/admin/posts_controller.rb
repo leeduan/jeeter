@@ -29,7 +29,7 @@ class Admin::PostsController < AdminController
 
   def update
     if @post.update(post_params)
-      flash[:success] = "Post was updated."
+      flash[:success] = "Post updated."
       redirect_to admin_posts_path
     else
       flash[:danger] = 'Please fill in all required fields.'

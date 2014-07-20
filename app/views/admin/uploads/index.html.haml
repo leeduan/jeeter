@@ -1,0 +1,38 @@
+%h3 All Uploads
+.panel.panel-uploads
+  .panel-bar.uploads-bar
+    = render 'shared/admin_search', objects: @uploads, terms: @search_term, object_name: 'Uploads', path: method(:admin_uploads_path)
+  .table-responsive
+    %table.table
+      %thead
+        %tr
+          %th Thumbnail
+          %th Title
+          %th Author
+          %th Type
+          %th Date
+          %th Delete
+      %tbody
+        - @uploads.each do |upload|
+          %tr
+            %td.upload-thumbnail
+              - case upload.file_type
+              - when 'image'
+                %i.bg-image{ :style => "background-image: url(/uploads/#{upload.media_file_name})" }
+              - when 'video'
+                %i.glyphicon.glyphicon-film
+              - when 'audio'
+                %i.glyphicon.glyphicon-music
+              - when 'file'
+                %i.glyphicon.glyphicon-file
+            %td
+              = link_to upload.basename, edit_admin_upload_path(upload)
+            %td
+              = upload.user.full_name
+            %td
+              = upload.extension.sub('.', '').upcase
+            %td
+              = print_date(upload.created_at)
+            %td.text-center
+              = link_to admin_upload_path(upload), method: :delete, confirm: 'Are you sure? Please confirm.' do
+                %i.glyphicon.glyphicon-remove

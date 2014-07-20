@@ -13,5 +13,6 @@ module Jeeter
       g.orm :active_record
       g.template_engine :haml
     end
+    Paperclip::Attachment.default_options[:path] = "#{Rails.root}/public/uploads/:filename"
   end
 end

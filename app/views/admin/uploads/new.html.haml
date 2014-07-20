@@ -1,0 +1,18 @@
+%h3 Upload New Media
+= form_for @upload, url: admin_uploads_path, html: { multipart: true, id: 'fileupload' } do |f|
+  = f.file_field :media, id: nil
+.table-responsive#drag-upload-files
+  %table.table
+    %thead
+      %tr
+        %th Filename
+        %th Type
+        %th Status
+        %th Progress
+    %tbody
+= form_for @upload, url: admin_uploads_path, html: { multipart: true, css: 'form-inline' } do |f|
+  = f.label :media, 'Single File Uploader'
+  .form-group
+    = f.submit 'Upload File', class: 'btn btn-primary pull-right'
+    .form-with-submit
+      = f.file_field :media, id: nil, class: 'form-control'

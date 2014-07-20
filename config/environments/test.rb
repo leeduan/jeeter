@@ -14,4 +14,5 @@ Jeeter::Application.configure do
     host: 'localhost',
     port: 52662
   }
+  Paperclip::Attachment.default_options[:path] = "#{Rails.root}/spec/test_files/:filename"
 end
