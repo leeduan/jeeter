@@ -6,9 +6,9 @@
         - if @upload.image?
           .upload-image-preview
             = image_tag("/uploads/#{@upload.media_file_name}", alt: @upload.alt)
-        .form-group
-          = f.label :alt, 'Alt Text'
-          = f.text_field :alt, class: 'form-control'
+          .form-group
+            = f.label :alt, 'Alt Text'
+            = f.text_field :alt, class: 'form-control'
         .form-group
           = f.label :description, 'Description'
           = f.text_area :description, class: 'form-control', rows: 5
