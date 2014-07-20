@@ -8,6 +8,24 @@ describe Admin::UploadsController do
       let(:action) { get :index }
     end
 
+    it 'assigns search_terms' do
+      get :index, search_term: 'hello'
+      expect(assigns(:search_term)).to eq('hello')
+    end
+
+    it 'assigns uploads' do
+      js_upload = ActionDispatch::Http::UploadedFile.new({
+        filename: 'hello-world2a9e6fa92d2589e7b07f9b2ac6eadca1.js',
+        type: 'application/javascript',
+        tempfile: File.new("#{Rails.root}/spec/fixtures/applications/hello-world2a9e6fa92d2589e7b07f9b2ac6eadca1.js")
+      })
+      image = Fabricate(:upload, created_at: Time.now)
+      js = Fabricate(:upload, media: js_upload, created_at: Time.now - 10)
+
+      get :index
+      expect(assigns(:uploads)).to eq([image, js])
+    end
+
     it 'renders the index template' do
       get :index
       expect(response).to render_template :index

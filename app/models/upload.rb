@@ -1,5 +1,6 @@
 class Upload < ActiveRecord::Base
   include Searchable
+  default_scope { order('created_at DESC') }
 
   belongs_to :user
   has_attached_file :media
