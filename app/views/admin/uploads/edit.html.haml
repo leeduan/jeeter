@@ -1,0 +1,39 @@
+%h3 Edit Upload
+= form_for [:admin, @upload], html: {class: 'admin-upload-form'} do |f|
+  .column-left
+    .upload-body
+      .panel
+        - if @upload.file_type == 'image'
+          .upload-image-preview
+            = image_tag("/uploads/#{@upload.media_file_name}", alt: @upload.alt)
+        .form-group
+          = f.label :alt, 'Alt Text'
+          = f.text_field :alt, class: 'form-control'
+        .form-group
+          = f.label :description, 'Description'
+          = f.text_area :description, class: 'form-control', rows: 5
+  .column-right
+    .panel
+      %p Save
+      %hr
+      %p
+        %i.glyphicon.glyphicon-calendar
+        Uploaded on:
+        %strong
+          = print_date @upload.created_at
+      %p
+        File URL:
+        %input.disabled.form-control(type="text" value="#{root_url}uploads/#{@upload.media_file_name}" disabled)
+      %p
+        File name:
+        %strong
+          = @upload.media_file_name
+      %p
+        File type:
+        %strong
+          = @upload.extension.sub('.', '').upcase
+      = f.submit 'Update', class: 'btn btn-primary pull-right'
+      = link_to 'Delete File', admin_upload_path(@upload), method: :delete, confirm: 'Are you sure? Please confirm.', class: 'btn btn-delete'
+
+
+

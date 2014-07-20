@@ -26,7 +26,7 @@
               - when 'file'
                 %i.glyphicon.glyphicon-file
             %td
-              = link_to upload.basename, ''
+              = link_to upload.basename, edit_admin_upload_path(upload)
             %td
               = upload.user.full_name
             %td

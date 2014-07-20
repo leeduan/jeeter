@@ -118,4 +118,94 @@ describe Admin::UploadsController do
       end
     end
   end
+
+  describe 'GET edit' do
+    it_behaves_like 'require admin' do
+      let(:action) { get :edit, id: 1 }
+    end
+
+    let(:upload) { Fabricate(:upload) }
+
+    it 'assigns @upload' do
+      get :edit, id: upload.to_param
+      expect(assigns(:upload)).to eq(upload);
+    end
+
+    it 'renders the edit template' do
+      get :edit, id: upload.to_param
+      expect(response).to render_template :edit
+    end
+  end
+
+  describe 'DELETE destroy' do
+    let(:upload) { Fabricate(:upload) }
+
+    it_behaves_like 'require admin' do
+      let(:action) { delete :destroy, id: upload.to_param }
+    end
+
+    it 'deletes the upload and file' do
+      delete :destroy, id: upload.to_param
+      expect(Upload.count).to eq(0)
+      expect(File.exists? "#{Rails.root}/spec/test_files/placeholder3d15e3a5eaae04842667502103f994d8.gif").to eq(false)
+    end
+
+    it 'assigns flash success message' do
+      delete :destroy, id: upload.to_param
+      expect(flash[:success]).to be_present
+    end
+
+    it 'redirects to admin uploads path' do
+      delete :destroy, id: upload.to_param
+      expect(response).to redirect_to admin_uploads_path
+    end
+  end
+
+  describe 'PATCH update' do
+    let(:upload) { Fabricate(:upload) }
+
+    it_behaves_like 'require admin' do
+      let(:action) { patch :update, id: upload.to_param }
+    end
+
+    context 'with valid params' do
+      before { patch :update, upload: { alt: 'Derek', description: 'Derek Card' }, id: upload.to_param }
+
+      it 'updates the description and alt text' do
+        upload = Upload.first
+        expect(upload.alt).to eq('Derek')
+        expect(upload.description).to eq('Derek Card')
+      end
+
+      it 'assigns flash success message' do
+        expect(flash[:success]).to be_present
+      end
+
+      it 'redirects to edit upload path' do
+        expect(response).to redirect_to edit_admin_upload_path(upload)
+      end
+    end
+
+    context 'with invalid params' do
+      too_long_text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas posuere ' +
+                      'auctor ornare. Pellentesque augue risus, sollicitudin a rutrum eget, ultricies ' +
+                      'vel metus. Sed facilisis aliquet lobortis. Ut scelerisque auctor erat, eu ' +
+                      'dapibus nisi pulvinar ut. Fusce iaculis mi id lorem posuere, quis scelerisque ' +
+                      'lorem porttitor. Vestibulum porta, diam in suscipit venenatis, erat nibh bibendum ' +
+                      'justo, id ultricies purus sapien id tortor. Aliquam sit amet mi viverra, ultricies ' +
+                      'nisl et, lacinia erat. Mauris vel nisl eros. Morbi magna magna, vulputate vitae ' +
+                      'malesuada nec, scelerisque sed felis. Sed vestibulum metus ut auctor lacinia. ' +
+                      'Fusce elementum leo nisl, tincidunt porta erat dictum id. Aenean euismod tortor ' +
+                      'lacinia, scelerisque diam sed, faucibus tortor.'
+      before { patch :update, upload: { alt: too_long_text, description: '' }, id: upload.to_param }
+
+      it 'assigns flash danger now message' do
+        expect(flash.now[:danger]).to be_present
+      end
+
+      it 'renders the edit upload path' do
+        expect(response).to render_template :edit
+      end
+    end
+  end
 end

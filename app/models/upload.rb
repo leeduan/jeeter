@@ -9,6 +9,7 @@ class Upload < ActiveRecord::Base
   before_create :sluggify_file_name
 
   validates :media, attachment_presence: true
+  validates_length_of :alt, maximum: 255
   validates_presence_of :user_id
   validates_attachment_content_type :media, content_type: [
     /^image\/.*$/, /^video\/.*$/, /^audio\/.*$/, /^application\/.*$/

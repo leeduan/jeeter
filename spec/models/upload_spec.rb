@@ -4,6 +4,7 @@ describe Upload do
   it { should belong_to(:user) }
   it { should validate_presence_of(:user_id) }
   it { should have_attached_file(:media) }
+  it { should ensure_length_of(:alt).is_at_most(255) }
   it { should validate_attachment_presence(:media) }
   it { should validate_attachment_content_type(:media)
     .allowing('image/png', 'image/gif', 'image/jpeg', 'image/jpg', 'video/mpeg',

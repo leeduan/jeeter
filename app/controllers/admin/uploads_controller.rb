@@ -27,7 +27,26 @@ class Admin::UploadsController < AdminController
     end
   end
 
+  def edit
+    @upload = Upload.find(params[:id])
+  end
+
   def destroy
-    # TODO: handle deletion
+    Upload.find(params[:id]).destroy
+    flash[:success] = 'Upload deleted.'
+    redirect_to admin_uploads_path
+  end
+
+  def update
+    upload = Upload.find(params[:id])
+
+    if upload.update(alt: params[:upload][:alt], description: params[:upload][:description])
+      flash[:success] = 'Upload updated.'
+      redirect_to edit_admin_upload_path(upload)
+    else
+      @upload = upload.reload
+      flash.now[:danger] = "Error, #{@upload.errors.full_messages[0]}."
+      render :edit
+    end
   end
 end
