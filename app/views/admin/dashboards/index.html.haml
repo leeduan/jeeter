@@ -16,9 +16,9 @@
     .col-sm-4
       %ul
         %li
-          %a Upload a file
+          = link_to 'Upload a file', new_admin_upload_path
         %li
-          %a Create a tag
+          = link_to 'Create a category', admin_categories_path
         %li
           %a Review your comments
     .col-sm-4
@@ -39,8 +39,7 @@
           %li
             %p
               = print_date(post.published_at)
-              %a
-                = post.title
+              = link_to post.title, edit_admin_post_path(post)
     .col-sm-6
       %h4
         %span.small Comments
