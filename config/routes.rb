@@ -19,5 +19,6 @@ Jeeter::Application.routes.draw do
     resources :categories, except: [:show]
     resources :tags, except: [:show]
     resources :uploads, except: [:show], path: 'media'
+    resources :comments, only: [:index, :edit, :update, :delete]
   end
 end

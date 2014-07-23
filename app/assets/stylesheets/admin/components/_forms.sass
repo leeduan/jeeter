@@ -43,9 +43,6 @@
       margin: 0 5px
       &:hover
         text-decoration: none
-      &.disabled
-        color: $gray-light
-        cursor: not-allowed
     input[type=text]
       color: $gray-light
       text-align: center
@@ -56,6 +53,7 @@
       margin: 0 5px
   &.posts-bar,
   &.uploads-bar
+  &.comments-bar
     .pagination-form
       @media screen and (min-width: $screen-md)
         float: right !important
@@ -145,4 +143,3 @@ td
 .btn-delete
   padding-left: 0
   border-left: 0 none
-  color: $brand-danger

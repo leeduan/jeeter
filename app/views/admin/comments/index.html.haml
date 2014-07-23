@@ -1,0 +1,39 @@
+%h3 Comments
+.panel.panel-comments
+  .panel-bar.comments-bar
+    = render 'shared/admin_search', objects: @comments, terms: @search_term, object_name: 'Comments', path: method(:admin_comments_path)
+  .table-responsive
+    %table.table
+      %thead
+        %tr
+          %th Author
+          %th Comment
+          %th In Response To
+          %th Delete
+      %tbody
+        - @comments.each do |comment|
+          %tr
+            %td
+              %p
+                = comment.author_name
+                %br
+                = mail_to comment.author_email
+            %td
+              %p
+                %span.gray
+                  Submitted on
+                  = link_to print_date(comment.created_at), blog_path(comment.post)
+                %br
+                = comment.content
+            %td
+              .comment-edit-post
+                = link_to comment.post.title, edit_admin_post_path(comment.post)
+              .comment-icon
+                %i.glyphicon.glyphicon-comment
+                %span.comment-count
+                  = comment.post.comments.count
+              = link_to blog_path(comment.post) do
+                View Post
+            %td.text-center
+              = link_to admin_comment_path(comment), method: :delete, confirm: 'Are you sure? Please confirm.' do
+                %i.glyphicon.glyphicon-remove
