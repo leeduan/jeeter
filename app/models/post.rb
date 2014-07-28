@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  default_scope { order('published_at DESC') }
+  default_scope { includes(:user, :categories, :comments).order('published_at DESC') }
   include Searchable
 
   belongs_to :user

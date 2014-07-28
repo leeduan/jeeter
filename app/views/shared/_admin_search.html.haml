@@ -13,5 +13,5 @@
   = link_to_unless objects.last_page?, '&raquo;'.html_safe, path.call(page: objects.total_pages, search_term: terms) do
     = link_to '&raquo;'.html_safe, '', class: 'disabled'
 = form_tag path.call, method: :get, class: 'bar-search' do
-  = text_field_tag 'search_term', terms, class: 'form-control', placeholder: 'Search by Title'
+  = text_field_tag 'search_term', terms, class: 'form-control'
   = submit_tag "Search #{object_name}", class: 'btn btn-default'
