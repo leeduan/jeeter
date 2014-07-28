@@ -12,31 +12,34 @@
           %th Delete
       %tbody
         - @comments.each do |comment|
-          - if comment.approved?
-            %tr
-          - else
-            %tr.warning
-              %td
-                %p
-                  = comment.author_name
-                  %br
-                  = mail_to comment.author_email
-              %td
-                %p
-                  %span.gray
-                    Submitted on
-                    = link_to print_date(comment.created_at), blog_path(comment.post)
-                  %br
-                  = comment.content
-              %td
-                .comment-edit-post
-                  = link_to comment.post.title, edit_admin_post_path(comment.post)
-                .comment-icon
-                  %i.glyphicon.glyphicon-comment
-                  %span.comment-count
-                    = comment.post.comments.count
-                = link_to blog_path(comment.post) do
-                  View Post
-              %td.text-center
-                = link_to admin_comment_path(comment), method: :delete, confirm: 'Are you sure? Please confirm.' do
-                  %i.glyphicon.glyphicon-remove
+          %tr{'class' => (comment.approved? ? '' : 'warning')}
+            %td
+              %p
+                = comment.author_name
+                %br
+                = mail_to comment.author_email
+            %td
+              %p
+                %span.gray
+                  Submitted on
+                  = link_to print_date(comment.created_at), blog_path(comment.post)
+                %br
+                = comment.content
+              .content-actions
+                - if comment.approved?
+                  = link_to 'Unapprove', admin_comments_approve_path, data: { id: comment.id, approved: false }
+                - else
+                  = link_to 'Approve', admin_comments_approve_path, data: { id: comment.id, approved: true }
+                | Reply | Edit | Trash
+            %td
+              .comment-edit-post
+                = link_to comment.post.title, edit_admin_post_path(comment.post)
+              .comment-icon
+                %i.glyphicon.glyphicon-comment
+                %span.comment-count
+                  = comment.post.comments.count
+              = link_to blog_path(comment.post) do
+                View Post
+            %td.text-center
+              = link_to admin_comment_path(comment), method: :delete, confirm: 'Are you sure? Please confirm.' do
+                %i.glyphicon.glyphicon-remove

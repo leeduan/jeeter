@@ -16,6 +16,7 @@ Jeeter::Application.routes.draw do
     post '/login', to: 'sessions#create'
     get '/logout', to: 'sessions#destroy'
     get '/', to: 'dashboards#index'
+    post '/comments/approve', to: 'comments#approve'
 
     resources :posts, except: [:show]
     resources :categories, except: [:show]
