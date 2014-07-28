@@ -27,6 +27,10 @@ describe Admin::CommentsController do
   end
 
   describe 'POST approve' do
+    it_behaves_like 'require admin' do
+      let(:action) { get :index }
+    end
+
     context 'HTML response' do
       it 'redirects to admin_comments_path' do
         post :approve, id: 1, approved: "true"

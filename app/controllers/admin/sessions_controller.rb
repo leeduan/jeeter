@@ -1,7 +1,9 @@
 class Admin::SessionsController < ApplicationController
   layout 'layouts/basic'
 
-  def new; end
+  def index
+    redirect_to admin_path and return if session[:user_id]
+  end
 
   def create
     user = User.find_by(username: params[:username])

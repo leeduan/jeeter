@@ -2,9 +2,21 @@ require 'rails_helper'
 
 describe Admin::SessionsController do
   describe 'GET index' do
-    it 'renders the index template' do
-      get :index
-      expect(response).to render_template :index
+
+    context 'user is already signed in' do
+      it 'redirects to admin dashboard' do
+        admin = Fabricate(:admin, password: 'admin')
+        session[:user_id] = admin.id
+        get :index
+        expect(response).to redirect_to admin_path
+      end
+    end
+
+    context 'user is not signed in' do
+      it 'renders the index template' do
+        get :index
+        expect(response).to render_template :index
+      end
     end
   end
 
