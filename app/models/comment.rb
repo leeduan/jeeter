@@ -4,6 +4,7 @@ class Comment < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :post
+  has_ancestry orphan_strategy: :destroy
 
   validates_presence_of :content, :author_name, :author_email, :post_id
 end

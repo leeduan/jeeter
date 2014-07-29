@@ -27,11 +27,13 @@ ActiveRecord::Schema.define(version: 20140722040407) do
     t.string   "author_name"
     t.string   "author_email"
     t.string   "author_url"
-    t.integer  "parent_id"
+    t.string   "ancestry"
     t.boolean  "approved"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "comments", ["ancestry"], name: "index_comments_on_ancestry", using: :btree
 
   create_table "post_categories", force: true do |t|
     t.integer  "post_id"

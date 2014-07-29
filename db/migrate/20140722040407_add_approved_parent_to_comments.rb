@@ -1,6 +1,7 @@
 class AddApprovedParentToComments < ActiveRecord::Migration
   def change
-    add_column :comments, :parent_id, :integer, after: :author_url
-    add_column :comments, :approved, :boolean, after: :parent_id
+    add_column :comments, :ancestry, :string, after: :author_url
+    add_column :comments, :approved, :boolean, after: :ancestry
+    add_index :comments, :ancestry
   end
 end

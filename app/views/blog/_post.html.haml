@@ -18,4 +18,4 @@
   - if @comments.any?
     .post-comments
       %h4 Comments
-      = render partial: 'comments/comment', collection: @comments
+      = nested_comments @comments.arrange(order: :created_at)

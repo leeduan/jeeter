@@ -26,6 +26,8 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     addressable (2.3.6)
+    ancestry (2.1.0)
+      activerecord (>= 3.0.0)
     arel (4.0.2)
     bcrypt (3.1.7)
     bcrypt-ruby (3.1.5)
@@ -204,6 +206,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ancestry
   bcrypt-ruby
   bootstrap-sass (~> 3.1.1)
   capybara
