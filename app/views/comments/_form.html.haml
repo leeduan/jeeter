@@ -1,4 +1,6 @@
 = form_for @comment, url: blog_comments_path(@post, @comment) do |f|
+  %h4 Leave a Comment
+  = f.hidden_field :parent_id
   - if logged_in?
     = f.hidden_field :author_name, value: current_user.full_name
     = f.hidden_field :author_email, value: current_user.email

@@ -13,7 +13,6 @@
   = "| #{post.comments.any? ? post.comments.size.to_s + ' Comments' : 'No Comments'}" if is_preview
 %hr
 - unless is_preview
-  %h4 Leave a Comment
   = render 'comments/form'
   - if @comments.any?
     .post-comments

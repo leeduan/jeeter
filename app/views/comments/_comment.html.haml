@@ -1,4 +1,4 @@
-.comment
+.comment{data:{id: comment.id}}
   %p.comment-name
     = comment.author_name
     says:
@@ -8,4 +8,4 @@
     Created on
     = print_date(comment.created_at)
   .comment-actions
-    = link_to 'Reply', ''
+    %a.reply-form(href='#') Reply
