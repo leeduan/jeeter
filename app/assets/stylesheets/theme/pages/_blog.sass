@@ -12,12 +12,24 @@
     &:last-of-type
       margin: 0
 .post-comments
-  margin-top: 2em
+  margin:
+    top: 2em
+    bottom: 1em
+  .comment
+    margin-top: 1em
+    border-bottom: 1px solid $gray-lighter
+    &:last-of-type
+      border-bottom: 0 none
+  .comment-name
+    font-weight: bold
+  .comment-content,
+  .comment-date,
   .comment-name
     margin-bottom: 0.5em
-    font-weight: bold
-  .comment-content
-    margin-bottom: 0.5em
+  .comment-actions
+    margin-bottom: 1em
+  .comment-nested
+    margin-left: 1em
 .search-bar
   input[type=submit]
     float: right
@@ -27,3 +39,6 @@
     padding-right: 0.5em
     input[type=text]
       width: 100%
+h4 .reply-cancel
+  color: $brand-primary
+  padding-left: 1em

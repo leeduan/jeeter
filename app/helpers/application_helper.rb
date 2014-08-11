@@ -14,4 +14,10 @@ module ApplicationHelper
     end
     list_conjunction
   end
+
+  def nested_comments(comments)
+    comments.map do |message, sub_comments|
+      render(message) + content_tag(:div, nested_comments(sub_comments), class: 'comment-nested')
+    end.join.html_safe
+  end
 end

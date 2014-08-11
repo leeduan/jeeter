@@ -13,9 +13,8 @@
   = "| #{post.comments.any? ? post.comments.size.to_s + ' Comments' : 'No Comments'}" if is_preview
 %hr
 - unless is_preview
-  %h4 Leave a Comment
   = render 'comments/form'
   - if @comments.any?
     .post-comments
       %h4 Comments
-      = render partial: 'comments/comment', collection: @comments
+      = nested_comments @comments.arrange(order: :created_at)

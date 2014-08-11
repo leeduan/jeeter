@@ -52,7 +52,7 @@ describe Admin::TagsController do
       end
     end
 
-    context 'HTTP response' do
+    context 'HTML response' do
       it 'assigns flash success if valid params' do
         tag_attributes = Fabricate.attributes_for(:tag, name: 'News')
         post :create, tag: tag_attributes
