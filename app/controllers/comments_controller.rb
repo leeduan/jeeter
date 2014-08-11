@@ -7,18 +7,23 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        template = render_to_string(partial: 'comments/comment', locals: { comment: @comment })
-        format.json { render json: { comment_template: template } }
+        format.json do
+          template = render_to_string(
+            partial: 'comments/comment',
+            formats: [:html],
+            locals: { comment: @comment })
+          render json: { comment_template: template }, status: :created
+        end
         format.html { redirect_to blog_path(@post), flash: { success: 'New comment created.' } }
       else
-        unless request.xhr?
+        format.json { render json: @comment.errors, status: :bad_request }
+        format.html do
           @comments = @post.comments.reload
           flash.now[:danger] = 'Please fill out all required fields.'
           set_recent_posts
           set_categories
+          render 'blog/show'
         end
-        format.json { render json: @comment.errors, status: :bad_request }
-        format.html { render 'blog/show' }
       end
     end
   end
